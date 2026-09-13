@@ -89,6 +89,7 @@ a{color:inherit}
 
 /* ================= SECTIONS ================= */
 main section{padding:84px 0}
+main > section:last-child{padding-bottom:110px}
 main section + section{border-top:1px solid var(--rule)}
 .shead{display:flex;align-items:baseline;margin:0 0 34px}
 .shead .idx{margin-right:16px}
@@ -185,14 +186,6 @@ pre code{background:none;padding:0}
 .row .k{font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);padding-top:4px}
 .row .v{max-width:64ch}
 .row .v p{margin:0}
-
-/* ================= FOOTER ================= */
-footer{background:var(--ink);color:#8FA3B2;padding:56px 0 48px;margin-top:0}
-footer a{color:#C9D6E0;text-decoration:none;border-bottom:1px solid #33465A;padding-bottom:1px}
-footer a:hover{color:var(--sig);border-color:var(--sig)}
-footer .fgrid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-end}
-footer .big{font-family:var(--disp);line-height:1.18;font-size:27px;color:#F2EFE9;margin:0 0 12px;max-width:16ch}
-footer .meta{font-family:var(--mono);font-size:11px;letter-spacing:.07em;color:#5D7285;margin-top:22px}
 
 /* ================= MOTION ================= */
 .js .rise{opacity:0;transform:translateY(18px);
