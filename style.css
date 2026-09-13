@@ -94,3 +94,89 @@ span[data-en],em[data-en],a[data-en],strong[data-en]{display:inline}
   .site-head .wrap{flex-direction:column;align-items:flex-start;gap:12px}
   .row{display:block}.row .k{margin-bottom:3px}
 }
+
+/* ============ MOTION & DEPTH ============ */
+
+/* scroll reveal */
+.rise{opacity:0;transform:translateY(16px);
+  transition:opacity .62s cubic-bezier(.22,.68,.36,1),transform .62s cubic-bezier(.22,.68,.36,1)}
+.rise.in{opacity:1;transform:none}
+
+/* hero: staggered entrance on load */
+@keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.phead h1{animation:riseIn .7s cubic-bezier(.22,.68,.36,1) both}
+.phead .eyebrow{animation:riseIn .6s cubic-bezier(.22,.68,.36,1) both}
+.phead .sub{animation:riseIn .7s cubic-bezier(.22,.68,.36,1) .12s both}
+
+/* the highlight wipes in behind the key phrase */
+@keyframes wipe{from{background-size:0 100%}to{background-size:100% 100%}}
+em.hl{background:linear-gradient(var(--mark-soft),var(--mark-soft)) left center/0 100% no-repeat;
+  animation:wipe .75s cubic-bezier(.22,.68,.36,1) .55s forwards;padding:1px 5px}
+
+/* nav underline grows from the left */
+.site-nav a{position:relative;padding-bottom:3px}
+.site-nav a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;
+  background:var(--mark);transform:scaleX(0);transform-origin:left;
+  transition:transform .28s cubic-bezier(.22,.68,.36,1)}
+.site-nav a:hover::after{transform:scaleX(1)}
+.site-nav a.on::after{transform:scaleX(1)}
+.site-nav a.on{border-bottom:0}
+
+/* teaser cards lift and reveal an arrow */
+.teaser{transition:transform .3s cubic-bezier(.22,.68,.36,1),box-shadow .3s ease,border-color .3s ease;
+  position:relative;overflow:hidden}
+.teaser::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--mark);
+  transform:scaleY(0);transform-origin:top;transition:transform .34s cubic-bezier(.22,.68,.36,1)}
+.teaser:hover{transform:translateY(-3px);box-shadow:0 10px 26px -14px rgba(28,39,51,.28);border-color:var(--rule)}
+.teaser:hover::before{transform:scaleY(1)}
+.teaser .t{transition:color .22s ease}
+.teaser:hover .t{color:var(--mark)}
+.teaser .t::after{content:" \2192";opacity:0;margin-left:0;
+  transition:opacity .26s ease,margin-left .26s cubic-bezier(.22,.68,.36,1)}
+.teaser:hover .t::after{opacity:1;margin-left:5px}
+
+/* case studies: a marker in the left gutter */
+.case{position:relative}
+@media(min-width:1040px){
+  .case::before{content:"";position:absolute;left:-38px;top:9px;width:7px;height:7px;
+    border-radius:50%;background:var(--mark);opacity:.85}
+  .case::after{content:"";position:absolute;left:-35px;top:24px;bottom:8px;width:1px;
+    background:linear-gradient(var(--rule),transparent)}
+  .case:last-child::after{display:none}
+}
+
+/* field labels get a small leading rule that draws in */
+.field .label{position:relative;padding-left:0}
+.field{border-left:1px solid var(--rule);padding-left:18px;margin-left:1px;
+  transition:border-color .3s ease}
+.field:hover{border-left-color:var(--mark)}
+
+/* blockquote mark */
+blockquote{position:relative;background:linear-gradient(90deg,var(--mark-soft),transparent 62%);
+  padding:14px 0 14px 20px;border-radius:0 4px 4px 0}
+
+/* links: underline grows rather than sits there */
+main a:not(.teaser):not(.brand){border-bottom:0;
+  background:linear-gradient(var(--mark),var(--mark)) left bottom/100% 1px no-repeat;
+  padding-bottom:1px;transition:background-size .26s cubic-bezier(.22,.68,.36,1)}
+main a:not(.teaser):not(.brand):hover{background-image:linear-gradient(var(--mark-soft),var(--mark-soft));
+  background-size:100% 100%}
+
+/* numbers tick up slightly on hover of their paragraph */
+.num{transition:color .2s ease}
+p:hover .num{color:#9A3412}
+
+/* publications */
+.pub{transition:padding-left .3s cubic-bezier(.22,.68,.36,1)}
+.pub:hover{padding-left:10px}
+
+/* reading progress */
+#prog{position:fixed;top:0;left:0;height:2px;width:0;background:var(--mark);z-index:20;
+  transition:width .08s linear}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .rise{opacity:1;transform:none}
+  em.hl{background:var(--mark-soft);background-size:auto}
+}
