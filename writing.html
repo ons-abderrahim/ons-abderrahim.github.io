@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Python computes, the LLM writes — Ons Abderrahim</title>
+<meta name="description" content="A design pattern that stopped a reporting agent from ever showing a wrong number, and what it still does not solve.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-head"><div class="wrap">
+  <a class="brand" href="index.html">Ons Abderrahim</a>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="work.html">Work</a>
+    <a href="research.html">Research</a>
+    <a href="writing.html">Writing</a>
+    <a href="about.html">About</a>
+    <button id="lang">FR</button>
+  </nav>
+</div></header>
+<main class="wrap">
+<div class="phead">
+  <p class="eyebrow" data-en>Writing</p><p class="eyebrow" data-fr>Écrits</p>
+  <h1 data-en>Python computes, the LLM writes</h1>
+  <h1 data-fr>Python calcule, le LLM rédige</h1>
+  <p class="sub" data-en>How I stopped a reporting agent from ever showing a wrong number — and the three things this still doesn't solve.</p>
+  <p class="sub" data-fr>Comment j'ai empêché un agent de reporting d'afficher un seul chiffre erroné — et les trois choses que ça ne règle toujours pas.</p>
+</div>
+
+<section class="first">
+<div data-en>
+  <p>I spent this year building an AI agent for a hockey equipment factory. Once a week the quality team reviews production defects, and my agent writes the analysis they read: what moved, where defects concentrated, which trends held over sixty weeks.</p>
+  <p>The dataset was 7,780 defect records. The model was Llama 3.3 70B, self-hosted on vLLM because production data could not leave the building. None of that is the interesting part.</p>
+  <p>The interesting part is that the agent has never shown a wrong number in a meeting, and that this was the only reason anyone kept using it.</p>
+
+  <h2>Why one wrong number kills the whole thing</h2>
+  <p>Adoption of a reporting tool is not a gradient. It is a step function with a cliff.</p>
+  <p>If an engineer reads that defects rose 12% and then checks the spreadsheet and finds 8%, the tool is finished. Not degraded — finished. They stop reading it, and worse, they stop trusting the three numbers it got right. Nobody wants to fact-check a robot every Tuesday morning.</p>
+  <p>So the requirement was not high accuracy. It was zero. A system that is right 95% of the time produces a wrong figure roughly every fifth meeting, which over a quarter is several credibility-destroying events. For this use case, 95% is not a good score. It is a guarantee of failure on a slower timeline.</p>
+  <p>That reframing drove the design. I was not trying to make the model more accurate. I was trying to make a category of error impossible.</p>
+
+  <h2>The pattern</h2>
+  <p>The model is never allowed to produce a number.</p>
+  <p>Python computes every quantity that will appear in the output. The LLM receives those quantities pre-computed and pre-formatted, and its entire job is to arrange them into readable French prose. It is a writer with a fact sheet, not an analyst.</p>
+  <p>The values arrive as strings, already formatted for French: comma decimals, non-breaking space before the percent sign. This matters more than it looks. If the model can copy a token verbatim, copying is the path of least resistance. Hand it <code>0.083</code> and ask for a percentage, and you have invited it to do arithmetic.</p>
+
+  <h2>Verification is the actual work</h2>
+  <p>Constraining the prompt is not enough. Models drift, especially over long outputs, and especially when a sentence has an obvious next word that happens to be a number.</p>
+  <p>So after generation, every number in the output is checked against the set Python computed. Anything not in that set did not come from the data, by definition.</p>
+  <p>Extracting numbers from French prose is fiddlier than it sounds. <code>88,1 %</code> uses a comma decimal. <code>7 780</code> uses a space as a thousands separator, sometimes a narrow no-break space. You cannot naively split on whitespace.</p>
+  <p>The allowed set is every computed value plus a whitelist, and building that whitelist is where the false positives live. The first version rejected the sentence <em>"taux de 2,7 par 100 unités"</em>. Both numbers are correct, but <code>100</code> is not a data value at all — it is part of the phrase "per 100 units". Same story with week numbers, station identifiers and the year. That maintenance cost is the honest price of the pattern.</p>
+
+  <h2>The lesson I did not expect</h2>
+  <p>The model does not hallucinate randomly. It hallucinates <em>derived</em> quantities.</p>
+  <p>Given 412 defects this week and 380 last week, it will happily write "an increase of 32, or roughly 8%". Both correct. Neither in my facts dictionary. Both rejected.</p>
+  <p>This forced a discipline I would not have arrived at otherwise: <strong>if you want a quantity mentioned, you must compute it.</strong> Deltas, percentages, ratios, rates per hundred, run lengths of a trend. My facts dictionary roughly tripled once I understood this, and rejection rates fell sharply.</p>
+  <p>There is a nice property here. The set of numbers the model is allowed to say is exactly the set I have decided are meaningful. The constraint doubles as editorial control.</p>
+
+  <h2>Falling back rather than trying harder</h2>
+  <p>When verification fails, the obvious move is to retry with a stricter prompt. I allow two attempts. After that, the system stops trying to be eloquent and renders a deterministic template. It is stiff, repetitive, and obviously machine-written. It is also incapable of being wrong.</p>
+  <p>This was the hardest decision to make and the easiest to defend afterwards. A system that occasionally reads awkwardly is a minor annoyance. A system that occasionally lies is not a system.</p>
+
+  <h2>What this does not solve</h2>
+  <p>I want to be precise about the limits, because the pattern is narrower than the phrase "anti-hallucination" suggests.</p>
+  <p><strong>It verifies numbers, not claims.</strong> If the model writes that defects are falling while every figure it quotes is correct and rising, verification passes. The numbers are right and the sentence is wrong. Directional and causal language is completely unchecked in my current implementation. This is the biggest hole and I know it.</p>
+  <p><strong>Tolerance is a compromise.</strong> I allow a small absolute tolerance so legitimate rounding is not rejected. That tolerance is also a window in which small errors pass.</p>
+  <p><strong>It cannot catch omission.</strong> Three accurate sentences that silently ignore the most important finding in the data will verify perfectly.</p>
+  <p><strong>I have no measure of quality.</strong> I can tell you the system has never emitted a wrong number. I cannot tell you whether the summaries are any good, whether they surface the right findings, or whether last month's prompt change made them better. Correctness without evaluation is half an engineering practice.</p>
+
+  <h2>What I would build next</h2>
+  <p>Verify direction as well as magnitude: compute the sign of every delta and reject prose whose directional vocabulary contradicts it. A day of work, and it closes the largest gap.</p>
+  <p>Build a golden set. Fifty fact dictionaries with human-written reference summaries, and an actual score, so prompt changes stop being guesses.</p>
+  <p>Log rejections as a first-class metric rather than a warning line. The rejection rate over time is a real signal about model drift and about my own fact coverage.</p>
+
+  <p style="margin-top:32px">If you are putting a language model in front of people who will check its arithmetic, the useful question is not how to make it more accurate. It is which class of error you can make structurally impossible, and what you are willing to ship instead when you cannot.</p>
+</div>
+
+<div data-fr>
+  <p>J'ai passé cette année à construire un agent IA pour une usine d'équipement de hockey. Une fois par semaine, l'équipe qualité passe en revue les défauts de production, et mon agent rédige l'analyse qu'elle lit.</p>
+  <p>7 780 enregistrements de défauts. Llama 3.3 70B, auto-hébergé sur vLLM parce que les données de production ne pouvaient pas sortir du bâtiment. Rien de tout cela n'est la partie intéressante.</p>
+  <p>La partie intéressante, c'est que l'agent n'a jamais affiché un chiffre erroné en réunion, et que c'est la seule raison pour laquelle quelqu'un a continué à l'utiliser.</p>
+
+  <h2>Pourquoi un seul chiffre faux tue tout</h2>
+  <p>L'adoption d'un outil de reporting n'est pas un dégradé. C'est une fonction en escalier avec une falaise.</p>
+  <p>Si un ingénieur lit que les défauts ont augmenté de 12 %, vérifie le tableur et trouve 8 %, l'outil est fini. Pas dégradé : fini. On cesse de le lire, et pire, on cesse de croire les trois chiffres qui étaient justes.</p>
+  <p>L'exigence n'était donc pas une haute précision. C'était zéro. Un système juste 95 % du temps produit un chiffre faux environ une réunion sur cinq, soit plusieurs événements destructeurs de crédibilité par trimestre. Pour cet usage, 95 % n'est pas un bon score : c'est une garantie d'échec à retardement.</p>
+
+  <h2>Le patron</h2>
+  <p>Le modèle n'a jamais le droit de produire un nombre.</p>
+  <p>Python calcule chaque quantité qui apparaîtra dans la sortie. Le LLM les reçoit déjà calculées et déjà formatées, et son unique rôle est de les organiser en prose française lisible. C'est un rédacteur avec une fiche de données, pas un analyste.</p>
+
+  <h2>La vérification est le vrai travail</h2>
+  <p>Contraindre le prompt ne suffit pas. Les modèles dérivent, surtout sur les sorties longues. Après génération, chaque nombre du texte est confronté à l'ensemble calculé par Python. Tout ce qui n'y figure pas ne vient pas des données, par définition.</p>
+  <p>L'ensemble autorisé comprend aussi une liste blanche, et c'est là que vivent les faux positifs. La première version rejetait « taux de 2,7 par 100 unités » : les deux nombres sont justes, mais <code>100</code> n'est pas une donnée, c'est une partie de l'expression.</p>
+
+  <h2>La leçon inattendue</h2>
+  <p>Le modèle n'hallucine pas au hasard. Il hallucine des quantités <em>dérivées</em>.</p>
+  <p>Avec 412 défauts cette semaine et 380 la semaine dernière, il écrira volontiers « une hausse de 32, soit environ 8 % ». Les deux sont corrects. Aucun n'est dans mon dictionnaire de faits. Les deux sont rejetés.</p>
+  <p>Cela impose une discipline : <strong>si vous voulez qu'une quantité soit mentionnée, vous devez la calculer.</strong> Mon dictionnaire a triplé de taille une fois que je l'ai compris.</p>
+
+  <h2>Ce que ça ne règle pas</h2>
+  <p><strong>Ça vérifie les nombres, pas les affirmations.</strong> Si le modèle écrit que les défauts baissent alors que tous les chiffres cités sont justes et en hausse, la vérification passe. C'est le plus gros trou, et je le sais.</p>
+  <p><strong>Ça ne détecte pas l'omission.</strong> Trois phrases exactes qui ignorent silencieusement la découverte la plus importante passeront parfaitement.</p>
+  <p><strong>Je n'ai aucune mesure de qualité.</strong> Je peux affirmer qu'aucun chiffre erroné n'est jamais sorti. Je ne peux pas dire si les résumés sont bons. La justesse sans évaluation, c'est la moitié d'une pratique d'ingénierie.</p>
+
+  <p style="margin-top:32px">Si vous mettez un modèle de langage devant des gens qui vérifieront son arithmétique, la bonne question n'est pas comment le rendre plus exact. C'est quelle classe d'erreur vous pouvez rendre structurellement impossible, et ce que vous acceptez de livrer à la place quand vous ne le pouvez pas.</p>
+</div>
+</section>
+</main>
+<footer><div class="wrap">
+  <p data-en>Montréal, Québec &middot; working in French and English &middot; open to new roles</p>
+  <p data-fr>Montréal, Québec &middot; je travaille en français et en anglais &middot; ouverte à de nouveaux postes</p>
+  <p><a href="mailto:abderrahimons99@gmail.com">abderrahimons99@gmail.com</a> &nbsp;·&nbsp;
+     <a href="https://www.linkedin.com/in/ons-abderrahim">LinkedIn</a> &nbsp;·&nbsp;
+     <a href="https://github.com/ons-abderrahim">GitHub</a></p>
+  <p class="mono" style="margin-top:14px;font-size:11.5px">Last updated September 2026</p>
+</div></footer>
+<script src="nav.js"></script>
+</body></html>
