@@ -1,60 +1,55 @@
-# Portfolio — deployment
+# Portfolio
 
-## Files
+Seven files. Put them all at the **root** of `ons-abderrahim.github.io`, replacing what is there.
+
+```bash
+git add -A && git commit -m "Rebuild portfolio" && git push
+```
 
 | File | Page |
 |---|---|
-| `index.html` | Home |
-| `work.html` | Four case studies (Bauer, Schneider/Concordia, Hydatis, Assembly101) |
+| `index.html` | Home: hero, live stat counters, the through-line, work cards, the architecture diagram |
+| `work.html` | Four case studies, each structured brief / built / went wrong / fix |
 | `research.html` | The three publications |
-| `writing.html` | The anti-hallucination article, full text |
+| `writing.html` | The anti-hallucination article, full text, both languages |
 | `about.html` | Background, tools, education, contact |
-| `style.css` | All styling, one file |
-| `nav.js` | Language toggle + active nav state |
+| `style.css` | Design system, one file |
+| `app.js` | Language toggle, scroll reveal, count-up stats, reading progress |
 
-## Deploy to GitHub Pages
+## Design system
 
-Put all seven files at the **root** of your `ons-abderrahim.github.io` repo, replacing what's
-there now. Commit and push. Live in about a minute.
+**Type.** Fraunces for display (variable, with the WONK axis on, which is what gives the
+headings their character), IBM Plex Mono for labels and metadata, Source Serif 4 for body.
+All three load from Google Fonts.
 
-```bash
-git add -A
-git commit -m "Rebuild portfolio"
-git push
-```
+**Palette.** Deep blueprint ink `#0E1821` for hero and footer, warm paper `#F7F5F0` for
+content, signal orange `#E2581F` for emphasis. The hero has a faint technical grid masked
+with a radial gradient so it fades out rather than tiling flatly.
 
-## Bilingual
+**Motion.** Everything is `transform` and `opacity` only, so it stays on the GPU.
+`prefers-reduced-motion` disables all of it.
 
-Every page is fully French and English. The toggle is the FR/EN button in the header, and the
-choice persists across pages via localStorage.
+## Two things that matter if you edit it
 
-When you edit content, **edit both versions or delete the one you don't want.** The pattern is:
+**Bilingual.** Every page is complete in French and English. The pattern is:
 
 ```html
-<p data-en>English text</p>
-<p data-fr>Texte français</p>
+<p data-en>English</p>
+<p data-fr>Français</p>
 ```
 
-If you add a `data-en` without a matching `data-fr`, French visitors see a gap.
+Add one without the other and speakers of that language see a gap.
 
-## Keep these current
+**Progressive enhancement.** Animations only activate when JavaScript confirms it can run
+(`document.documentElement.classList.add('js')`). Without JS, everything is visible and
+correct rather than stuck invisible. The stat numbers are written into the HTML as their
+final values and JS animates *from* zero, so no-JS visitors see the right figures.
 
-**The footer date.** It says September 2026 on every page. A stale date undoes the whole effect
-of a carefully written site.
+Do not remove that `.js` guard when editing the CSS.
 
-**The Assembly101 case study** says "in progress". Once you have the split numbers and the
-per-participant spread, put them in. That entry becomes much stronger with real figures.
+## Keep current
 
-**The writing page** is the full article. If you publish it on LinkedIn as an article too, that
-is fine — cross-posting is normal and drives people back here.
+The footer date says September 2026 on every page.
 
-## What was deliberately left out
-
-No contact form. Static sites can't process them, and the old one just opened a mail client
-while claiming to have sent something.
-
-No skill bars, no percentage rings, no logo grid, no "Available for hire" badge, no loading
-screen, no sparkle characters. All of those read as template output.
-
-No analytics. Add Plausible or GoatCounter if you want numbers, but not Google Analytics on a
-personal site people will view while deciding whether to interview you.
+The Assembly101 case study says "in progress". Put the real split numbers in once you have
+them; that entry gets much stronger with figures.

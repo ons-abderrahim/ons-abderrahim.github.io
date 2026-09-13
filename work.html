@@ -5,40 +5,39 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Work | Ons Abderrahim</title>
 <meta name="description" content="Case studies: a production LLM agent at Bauer Hockey, domain adaptation at Schneider Electric, computer vision at Hydatis.">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<header class="site-head"><div class="wrap">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="head"><div class="wrap">
   <a class="brand" href="index.html">Ons Abderrahim</a>
-  <nav class="site-nav">
-    <a href="index.html">Home</a>
-    <a href="work.html">Work</a>
-    <a href="research.html">Research</a>
-    <a href="writing.html">Writing</a>
-    <a href="about.html">About</a>
+  <nav class="nav">
+    <a href="index.html">Home</a><a href="work.html">Work</a><a href="research.html">Research</a>
+    <a href="writing.html">Writing</a><a href="about.html">About</a>
     <button id="lang">FR</button>
   </nav>
 </div></header>
-<main class="wrap">
-<div class="phead">
-  <p class="eyebrow" data-en>Work</p><p class="eyebrow" data-fr>Travaux</p>
+
+
+<main>
+<section class="hero"><span class="tick tl"></span><span class="tick br"></span><div class="wrap">
+  <p class="lab" data-en>Work</p><p class="lab" data-fr>Travaux</p>
   <h1 data-en>Four things I built, and what each one taught me</h1>
   <h1 data-fr>Quatre choses que j'ai construites, et ce que chacune m'a appris</h1>
-</div>
-
-<section class="first">
+</div></div></section>
+<main>
+<section><div class="wrap narrow">
 <div class="case" id="bauer">
-  <p class="case-meta">BAUER HOCKEY · BLAINVILLE QC · 2026</p>
+  <p class="k">BAUER HOCKEY · BLAINVILLE QC · 2026</p>
   <h2 data-en>An LLM agent nobody could catch out</h2>
   <h2 data-fr>Un agent LLM qu'on ne pouvait pas prendre en défaut</h2>
   <p class="muted" data-en>AI &amp; machine learning intern, skate production line</p>
   <p class="muted" data-fr>Stagiaire IA et apprentissage automatique, ligne de production de patins</p>
 
-  <div class="field"><p class="label" data-en>The brief</p><p class="label" data-fr>Le mandat</p>
+  <div class="blk"><p class="lab lab-sig" data-en>The brief</p><p class="lab lab-sig" data-fr>Le mandat</p>
   <p data-en>A laptop and a fairly vague question: find out what AI could do for quality on a production line. No ML team above me, no existing pipeline, and production data that was not allowed to leave the building.</p>
   <p data-fr>Un portable et une question assez vague : découvrir ce que l'IA pouvait faire pour la qualité sur une ligne de production. Aucune équipe ML au-dessus de moi, aucun pipeline existant, et des données de production qui n'avaient pas le droit de sortir du site.</p></div>
 
-  <div class="field"><p class="label" data-en>What I built</p><p class="label" data-fr>Ce que j'ai construit</p>
+  <div class="blk"><p class="lab lab-sig" data-en>What I built</p><p class="lab lab-sig" data-fr>Ce que j'ai construit</p>
   <p data-en>An agent that writes the weekly defect analysis the quality team acts on, running on a self-hosted Llama 3.3 70B through vLLM with Qdrant retrieval, entirely on site. Underneath it, an ingestion pipeline with eight cleaning and normalisation rules over <span class="num">7,780</span> defect records and 60 weeks of time series, covering deduplication, timezone handling and rate normalisation per 100 units.</p>
   <p data-fr>Un agent qui rédige l'analyse hebdomadaire des défauts utilisée par l'équipe qualité, sur un Llama 3.3 70B auto-hébergé via vLLM avec récupération Qdrant, entièrement sur site. En dessous, un pipeline d'ingestion à huit règles de nettoyage et de normalisation sur <span class="num">7 780</span> enregistrements de défauts et 60 semaines de séries temporelles, incluant dédoublonnage, gestion des fuseaux horaires et taux normalisé par 100 unités.</p>
   <p data-en>Alongside it, a classifier mapping <span class="num">2,163</span> free-text operator comments, French and English mixed in the same field and written in a hurry, to 41 standardised codes. Fuzzy matching first, then multilingual sentence-transformer embeddings, with a confidence score per prediction so uncertain ones could be routed for review instead of silently assigned.</p>
@@ -46,13 +45,13 @@
   <p data-en>And a web application used at the station itself, where image capture is triggered by a USB foot pedal so the operator never takes their hands off the work. Two-role authentication, a deviation workflow, and 3% random validation sampling.</p>
   <p data-fr>Et une application web utilisée au poste même, où la capture d'image se déclenche par pédale USB pour que l'opérateur ne lâche jamais son travail. Authentification à deux rôles, gestion des dérogations, et échantillonnage aléatoire de validation à 3 %.</p></div>
 
-  <div class="field"><p class="label" data-en>What went wrong</p><p class="label" data-fr>Ce qui a mal tourné</p>
+  <div class="blk"><p class="lab lab-sig" data-en>What went wrong</p><p class="lab lab-sig" data-fr>Ce qui a mal tourné</p>
   <blockquote><p data-en>The first version worked immediately. It also produced a percentage I had never calculated. Correct arithmetic, confident tone, completely unverified. Nobody in that meeting would have caught it.</p>
   <p data-fr>La première version a fonctionné du premier coup. Elle a aussi produit un pourcentage que je n'avais jamais calculé. Arithmétique juste, ton assuré, aucune vérification. Personne dans cette réunion ne l'aurait relevé.</p></blockquote>
   <p data-en>Adoption of a reporting tool is not a gradient. It is a step function with a cliff. One wrong number in one meeting and nobody opens it again, and worse, they stop trusting the three numbers it got right.</p>
   <p data-fr>L'adoption d'un outil de reporting n'est pas un dégradé. C'est une fonction en escalier avec une falaise. Un seul chiffre erroné en réunion et plus personne ne l'ouvre, et pire, on cesse de croire les trois chiffres qui étaient justes.</p></div>
 
-  <div class="field"><p class="label" data-en>The fix</p><p class="label" data-fr>La correction</p>
+  <div class="blk"><p class="lab lab-sig" data-en>The fix</p><p class="lab lab-sig" data-fr>La correction</p>
   <p data-en>Python computes every figure. The model receives them pre-calculated and pre-formatted, and its entire job is to write French prose around numbers it was handed. After generation, every number in the output is checked against the values Python produced. Two failures and it falls back to a deterministic template that is stiff, repetitive, and incapable of being wrong.</p>
   <p data-fr>Python calcule chaque chiffre. Le modèle les reçoit déjà calculés et déjà formatés, et son unique rôle est d'écrire de la prose française autour de valeurs qu'on lui a données. Après génération, chaque nombre du texte est confronté aux valeurs produites par Python. Deux échecs et il retombe sur un gabarit déterministe rigide, répétitif, et incapable de se tromper.</p>
   <p data-en><a href="writing.html">I wrote this one up properly</a>, including the finding I did not expect and the three things it still does not solve.</p>
@@ -62,23 +61,23 @@
 </div>
 
 <div class="case" id="schneider">
-  <p class="case-meta">SCHNEIDER ELECTRIC &amp; CONCORDIA · 2024–2025</p>
+  <p class="k">SCHNEIDER ELECTRIC &amp; CONCORDIA · 2024–2025</p>
   <h2 data-en>Models that hold up in a building they've never seen</h2>
   <h2 data-fr>Des modèles qui tiennent dans un bâtiment jamais vu</h2>
   <p class="muted" data-en>Machine learning researcher · M.A.Sc. thesis, graded Excellent</p>
   <p class="muted" data-fr>Chercheuse en apprentissage automatique · mémoire de M.A.Sc., classé Excellent</p>
 
-  <div class="field"><p class="label" data-en>The problem</p><p class="label" data-fr>Le problème</p>
+  <div class="blk"><p class="lab lab-sig" data-en>The problem</p><p class="lab lab-sig" data-fr>Le problème</p>
   <p data-en>Occupancy and activity modelling from IoT sensors, across buildings that shared almost nothing: different layouts, different sensor placements, different people behaving differently in them. Train on one, deploy on another, and accuracy falls without your validation score ever warning you.</p>
   <p data-fr>Modélisation de l'occupation et des activités à partir de capteurs IoT, sur des bâtiments n'ayant presque rien en commun : agencements différents, placements de capteurs différents, personnes s'y comportant différemment. Entraînez sur l'un, déployez sur l'autre, et la précision chute sans que votre score de validation ne vous ait jamais prévenue.</p></div>
 
-  <div class="field"><p class="label" data-en>What I did</p><p class="label" data-fr>Ce que j'ai fait</p>
+  <div class="blk"><p class="lab lab-sig" data-en>What I did</p><p class="lab lab-sig" data-fr>Ce que j'ai fait</p>
   <p data-en>Built open-set and generalised domain adaptation frameworks and, more importantly, evaluated them honestly: held out entire buildings rather than random slices, and handled the open-set case where categories appear at inference that the model was never trained on, so it has to recognise that it does not know instead of forcing them into the nearest known class.</p>
   <p data-fr>Conçu des cadres d'adaptation de domaine ouverts et généralisés et, surtout, les ai évalués honnêtement : bâtiments entiers retenus plutôt que tranches aléatoires, et traitement du cas ouvert où des catégories jamais entraînées apparaissent à l'inférence, obligeant le modèle à reconnaître qu'il ne sait pas plutôt que de les forcer dans la classe connue la plus proche.</p>
   <p data-en><span class="num">90.1%</span> on occupancy estimation, <span class="num">88.1%</span> on cross-domain activity recognition, and a <span class="num">12%</span> improvement where deployment data differed from training data. I also planned and deployed the sensor network that fed it, increasing spatial coverage by 90%, which taught me more about real data than the modelling did.</p>
   <p data-fr><span class="num">90,1 %</span> en estimation d'occupation, <span class="num">88,1 %</span> en reconnaissance d'activités inter-domaines, et <span class="num">12 %</span> d'amélioration là où les données de déploiement différaient de l'entraînement. J'ai aussi planifié et déployé le réseau de capteurs qui l'alimentait, augmentant la couverture spatiale de 90 %, ce qui m'a appris davantage sur les données réelles que la modélisation.</p></div>
 
-  <div class="field"><p class="label" data-en>What I took from it</p><p class="label" data-fr>Ce que j'en retiens</p>
+  <div class="blk"><p class="lab lab-sig" data-en>What I took from it</p><p class="lab lab-sig" data-fr>Ce que j'en retiens</p>
   <p data-en>That the evaluation design matters more than the architecture. A random split will tell you what you want to hear. Holding out an entire environment tells you what you are actually going to get.</p>
   <p data-fr>Que la conception de l'évaluation compte plus que l'architecture. Un découpage aléatoire vous dira ce que vous voulez entendre. Retenir un environnement entier vous dit ce que vous allez réellement obtenir.</p></div>
 
@@ -86,11 +85,11 @@
 </div>
 
 <div class="case" id="hydatis">
-  <p class="case-meta">HYDATIS · TUNIS · 2022</p>
+  <p class="k">HYDATIS · TUNIS · 2022</p>
   <h2 data-en>My first vision system in production</h2>
   <h2 data-fr>Mon premier système de vision en production</h2>
 
-  <div class="field"><p class="label" data-en>What it was</p><p class="label" data-fr>De quoi il s'agissait</p>
+  <div class="blk"><p class="lab lab-sig" data-en>What it was</p><p class="lab lab-sig" data-fr>De quoi il s'agissait</p>
   <p data-en>An end-to-end pipeline on scanned documents that were never twice the same: YOLOv5 for layout detection, OCR for text extraction, spaCy for classification, then semantic embeddings to match candidates to postings. <span class="num">86.7%</span> precision and <span class="num">84.8%</span> F1 on genuinely messy, inconsistently formatted inputs. Shipped on Azure DevOps with CI/CD, monitoring and real-time inference.</p>
   <p data-fr>Un pipeline de bout en bout sur des documents numérisés jamais deux fois pareils : YOLOv5 pour la détection de mise en page, OCR pour l'extraction, spaCy pour la classification, puis embeddings sémantiques pour l'appariement candidats-offres. <span class="num">86,7 %</span> de précision et <span class="num">84,8 %</span> de F1 sur des entrées réellement bruitées et hétérogènes. Déployé sur Azure DevOps avec CI/CD, surveillance et inférence en temps réel.</p>
   <p data-en>Most of the work was the inputs, not the model. That ratio has held true on everything I have built since.</p>
@@ -100,29 +99,33 @@
 </div>
 
 <div class="case" id="assembly">
-  <p class="case-meta">ASSEMBLY101 · 2026 · IN PROGRESS</p>
+  <p class="k">ASSEMBLY101 · 2026 · IN PROGRESS</p>
   <h2 data-en>Measuring what benchmarks refuse to measure</h2>
   <h2 data-fr>Mesurer ce que les benchmarks refusent de mesurer</h2>
 
-  <div class="field"><p class="label" data-en>The gap</p><p class="label" data-fr>La lacune</p>
+  <div class="blk"><p class="lab lab-sig" data-en>The gap</p><p class="lab lab-sig" data-fr>La lacune</p>
   <p data-en>Benchmarks for temporal action recognition split their data by object, not by person. So they measure whether a model generalises to a new toy, and never whether it generalises to a new human doing the same job their own way. In a factory, the second question is the one that matters.</p>
   <p data-fr>Les jeux de référence pour la reconnaissance d'actions temporelles découpent leurs données par objet, pas par personne. Ils mesurent donc si un modèle généralise à un nouvel objet, jamais s'il généralise à une nouvelle personne faisant le même travail à sa façon. En usine, c'est la seconde question qui compte.</p></div>
 
-  <div class="field"><p class="label" data-en>What I'm measuring</p><p class="label" data-fr>Ce que je mesure</p>
+  <div class="blk"><p class="lab lab-sig" data-en>What I'm measuring</p><p class="lab lab-sig" data-fr>Ce que je mesure</p>
   <p data-en>Leave-one-participant-out against a random split on identical data, across 48 participants and 24 verbs. Reporting the spread across people rather than the mean, because a model that works for seven operators and fails for three is not a model that works. Then watching the footage of the worst one to find out why.</p>
   <p data-fr>Découpage retenant des participants entiers contre découpage aléatoire sur les mêmes données, sur 48 participants et 24 verbes. En rapportant l'écart entre les personnes plutôt que la moyenne, parce qu'un modèle qui fonctionne pour sept opérateurs et échoue pour trois n'est pas un modèle qui fonctionne. Puis en visionnant les séquences du pire pour comprendre pourquoi.</p></div>
 
   <p class="stack">PyTorch · ffmpeg · temporal models · leave-one-participant-out</p>
 </div>
-</section>
+</div></section>
 </main>
-<footer><div class="wrap">
-  <p data-en>Montréal, Québec &middot; working in French and English &middot; open to new roles</p>
-  <p data-fr>Montréal, Québec &middot; je travaille en français et en anglais &middot; ouverte à de nouveaux postes</p>
-  <p><a href="mailto:abderrahimons99@gmail.com">abderrahimons99@gmail.com</a> &nbsp;·&nbsp;
-     <a href="https://www.linkedin.com/in/ons-abderrahim">LinkedIn</a> &nbsp;·&nbsp;
-     <a href="https://github.com/ons-abderrahim">GitHub</a></p>
-  <p class="mono" style="margin-top:14px;font-size:11.5px">Last updated September 2026</p>
-</div></footer>
-<script src="nav.js"></script>
-</body></html>
+</main>
+<footer><div class="wrap"><div class="fgrid">
+  <div>
+    <p class="big" data-en>Looking for my next role.</p>
+    <p class="big" data-fr>À la recherche de mon prochain poste.</p>
+    <p style="margin:0"><a href="mailto:abderrahimons99@gmail.com">abderrahimons99@gmail.com</a></p>
+  </div>
+  <div style="text-align:right">
+    <p style="margin:0 0 6px"><a href="https://www.linkedin.com/in/ons-abderrahim">LinkedIn</a></p>
+    <p style="margin:0 0 6px"><a href="https://github.com/ons-abderrahim">GitHub</a></p>
+    <p class="meta">Montréal, QC &middot; FR / EN<br>Updated September 2026</p>
+  </div>
+</div></div></footer>
+<script src="app.js"></script></body></html>
