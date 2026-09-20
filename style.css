@@ -59,7 +59,7 @@ a{color:inherit}
   -webkit-mask-image:radial-gradient(120% 90% at 22% 30%,#000 20%,transparent 72%)}
 .hero .wrap{position:relative}
 .hero .lab{color:#6E8496}
-.hero h1{font-size:clamp(34px,5.4vw,62px);line-height:1.05;color:#FFFDF9;margin:20px 0 0;max-width:17ch}
+.hero h1{font-size:clamp(30px,4.1vw,46px);line-height:1.14;color:#FFFDF9;margin:20px 0 0;max-width:30ch}
 .hero h1 .sw{color:var(--sig);display:inline-block;position:relative}
 .hero h1 .sw::after{content:"";position:absolute;left:-2px;right:-2px;bottom:.1em;height:.42em;
   background:rgba(212,50,107,.22);transform:scaleX(0);transform-origin:left;

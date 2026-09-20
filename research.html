@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Research | Ons Abderrahim</title>
-<meta name="description" content="Three first-author publications on open-set and universal domain adaptation for IoT sensor data.">
+<meta name="description" content="Three first-author publications on open-set, universal and generalized domain adaptation for IoT sensor data.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css"></head><body>
@@ -22,13 +22,13 @@
   <p class="lab" data-en>Research</p><p class="lab" data-fr>Recherche</p>
   <h1 data-en>Domain adaptation for sensor data</h1>
   <h1 data-fr>Adaptation de domaine pour données de capteurs</h1>
-  <p class="dek" data-en>Three peer-reviewed papers, first author on all three, with J. Dridi, M. Amayri and N. Bouguila at Concordia University.</p>
-  <p class="dek" data-fr>Trois articles évalués par les pairs, première auteure des trois, avec J. Dridi, M. Amayri et N. Bouguila à l'Université Concordia.</p>
+  <p class="dek" data-en>Three peer-reviewed publications, first author on all three, with J. Dridi, M. Amayri and N. Bouguila at Concordia University.</p>
+  <p class="dek" data-fr>Trois publications évaluées par les pairs, première auteure des trois, avec J. Dridi, M. Amayri et N. Bouguila à l'Université Concordia.</p>
 </div></section>
 
 <section><div class="wrap narrow">
-  <p data-en>The same question sits under all three. A model trained in one place is sent somewhere it has never been. Sometimes the categories are the same and only the conditions change. Sometimes the new place contains things nobody ever taught it, and the honest answer is that it does not know. A random split hides both cases, which is why every result here holds out whole buildings instead.</p>
-  <p data-fr>La même question se trouve sous les trois. Un modèle entraîné à un endroit est envoyé là où il n'est jamais allé. Parfois les catégories sont les mêmes et seules les conditions changent. Parfois le nouvel endroit contient des choses que personne ne lui a apprises, et la réponse honnête est qu'il ne sait pas. Un découpage aléatoire cache ces deux cas, et c'est pourquoi chaque résultat ici retient des bâtiments entiers.</p>
+  <p data-en>The same question underlies all three. A model trained in one environment is deployed in another it has never observed. In some cases the label spaces match and only the conditions differ. In others the target environment contains classes that were absent from training, and the correct output is a rejection rather than a prediction. Random splits conceal both cases, which is why every result here is evaluated with building-level holdouts.</p>
+  <p data-fr>Une même question sous-tend les trois. Un modèle entraîné dans un environnement est déployé dans un autre qu'il n'a jamais observé. Dans certains cas, les espaces d'étiquettes coïncident et seules les conditions changent. Dans d'autres, l'environnement cible contient des classes absentes de l'entraînement, et la bonne sortie est un rejet plutôt qu'une prédiction. Un découpage aléatoire masque ces deux cas, raison pour laquelle chaque résultat présenté ici est évalué en retenant des bâtiments entiers.</p>
 </div></section>
 
 <section><div class="wrap narrow">
@@ -46,12 +46,12 @@
 </div></section>
 
 <section><div class="wrap narrow">
-  <h2 data-en>Why this carries over to vision</h2>
-  <h2 data-fr>Pourquoi ça vaut aussi pour la vision</h2>
-  <p data-en>The data was sensor readings. The question was not about sensors. When each person counts as their own domain, it is the same problem whether you measure it with an accelerometer or a camera, and the way you have to test it is identical: hold out whole people, report how far apart they land, and give the model a way to say it does not know.</p>
-  <p data-fr>Les données étaient des relevés de capteurs. La question, elle, ne portait pas sur les capteurs. Quand chaque personne compte comme son propre domaine, c'est le même problème qu'on le mesure avec un accéléromètre ou une caméra, et la manière de tester est identique : retenir des personnes entières, rapporter l'écart entre elles, et donner au modèle un moyen de dire qu'il ne sait pas.</p>
-  <p data-en>That is exactly what the <a href="work.html#assembly">Assembly101 work</a> does on video.</p>
-  <p data-fr>C'est précisément ce que fait le <a href="work.html#assembly">travail sur Assembly101</a> en vidéo.</p>
+  <h2 data-en>Transfer to computer vision</h2>
+  <h2 data-fr>Transfert vers la vision par ordinateur</h2>
+  <p data-en>The modality was sensor data; the question was not modality-specific. When each individual constitutes a separate domain, the problem is the same whether it is measured with an accelerometer or a camera, and so are the evaluation requirements: hold out whole subjects, report the distribution rather than the mean, and allow the model to reject.</p>
+  <p data-fr>La modalité était le signal de capteurs ; la question, elle, ne dépendait pas de la modalité. Lorsque chaque individu constitue un domaine à part entière, le problème reste le même qu'il soit mesuré par accéléromètre ou par caméra, et les exigences d'évaluation aussi : retenir des sujets entiers, rapporter la distribution plutôt que la moyenne, et permettre au modèle de rejeter.</p>
+  <p data-en>That protocol is applied to video in the <a href="work.html#assembly">Assembly101 evaluation</a>.</p>
+  <p data-fr>Ce protocole est appliqué à la vidéo dans l'<a href="work.html#assembly">évaluation sur Assembly101</a>.</p>
 </div></section>
 </main>
 <script src="app.js"></script></body></html>
