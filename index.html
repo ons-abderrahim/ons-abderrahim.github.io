@@ -25,13 +25,6 @@
   </div>
 </div></section>
 
-<section class="stats" style="padding:0"><div class="wrap" style="padding-left:0;padding-right:0"><div class="grid">
-  <div class="stat"><div class="n"><span data-to="3">3</span></div><div class="t" data-en>Papers, first author</div><div class="t" data-fr>Articles, première auteure</div></div>
-  <div class="stat"><div class="n"><span data-to="48">48</span></div><div class="t" data-en>Operators in Assembly101, none held out</div><div class="t" data-fr>Opérateurs dans Assembly101, aucun retenu</div></div>
-  <div class="stat"><div class="n"><span data-to="5.5" data-suf="x">5.5x</span></div><div class="t" data-en>Chance, spotting an operator from labels alone</div><div class="t" data-fr>Le hasard, pour reconnaître un opérateur des seules étiquettes</div></div>
-  <div class="stat"><div class="n"><span data-to="19">19</span></div><div class="t" data-en>Points between the best and worst operator</div><div class="t" data-fr>Points entre le meilleur et le pire opérateur</div></div>
-</div></div></section>
-
 <main>
 <section><div class="wrap narrow">
   <div class="shead"><span class="idx">01</span><h2 data-en>What the work has in common</h2><h2 data-fr>Ce que les travaux ont en commun</h2></div>
@@ -71,7 +64,7 @@
 </div></section>
 
 <section><div class="wrap narrow">
-  <div class="shead"><span class="idx">03</span><h2 data-en>How I stopped the model getting numbers wrong</h2><h2 data-fr>Comment j'ai empêché le modèle de se tromper de chiffre</h2></div>
+  <div class="shead"><span class="idx">03</span><h2 data-en>How the numbers are checked</h2><h2 data-fr>Comment les chiffres sont vérifiés</h2></div>
   <figure class="fig">
 <svg viewBox="0 0 860 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Verification loop">
   <g font-family="IBM Plex Mono, monospace" font-size="11.5">
@@ -103,18 +96,18 @@
       <path d="M656 84 H680 V53 H702"/><path d="M656 84 H680 V117 H702"/>
     </g>
     <g class="fade">
-      <text x="672" y="46" fill="#55646F" font-size="10.5">pass</text>
-      <text x="666" y="140" fill="#D4326B" font-size="10.5">2 fails</text>
+      <text x="696" y="49" text-anchor="end" fill="#55646F" font-size="10.5">pass</text>
+      <text x="698" y="133" text-anchor="end" fill="#D4326B" font-size="10.5">2 fails</text>
       <path d="M412 118 V150 H234 V110" stroke="#D4326B" stroke-width="1.1" fill="none" stroke-dasharray="3 3"/>
       <text x="300" y="164" text-anchor="middle" fill="#D4326B" font-size="10.5">facts, pre-formatted</text>
     </g>
   </g>
 </svg>
-<figcaption data-en>The model never writes a number. Python works out every figure and hands it over already formatted. The model only writes the sentences around them. Every number in the text is then checked against the source data before anyone sees it.</figcaption>
-<figcaption data-fr>Le modèle n'écrit jamais un nombre. Python calcule chaque chiffre et le transmet déjà mis en forme. Le modèle n'écrit que les phrases autour. Chaque nombre du texte est ensuite comparé aux données sources avant que quiconque le voie.</figcaption>
+<figcaption data-en>The model never produces a number. Python computes every figure and passes them over already formatted. The model writes only the sentences around them. Every number in the finished text is then checked against the source data.</figcaption>
+<figcaption data-fr>Le modèle ne produit jamais un nombre. Python calcule chaque chiffre et le transmet déjà mis en forme. Le modèle n'écrit que les phrases autour. Chaque nombre du texte final est ensuite comparé aux données sources.</figcaption>
 </figure>
-  <p data-en>One wrong number in one meeting and nobody opens the tool again. So the target was not high accuracy. It was zero. <a href="writing.html">I wrote up how it works</a>, including the part I did not see coming and the three problems it still does not fix.</p>
-  <p data-fr>Un seul chiffre erroné en réunion et plus personne n'ouvre l'outil. L'objectif n'était donc pas une haute précision. C'était zéro. <a href="writing.html">J'ai expliqué comment ça fonctionne</a>, avec ce que je n'avais pas vu venir et les trois problèmes que ça ne règle toujours pas.</p>
+  <p data-en>One wrong number in one meeting and nobody opens the tool again. The target was never high accuracy. It was zero. <a href="writing.html">I wrote up how it works</a>, what surprised me, and the three problems it does not fix.</p>
+  <p data-fr>Un seul chiffre erroné en réunion et plus personne n'ouvre l'outil. L'objectif n'a jamais été une haute précision. C'était zéro. <a href="writing.html">J'ai expliqué comment ça marche</a>, ce qui m'a surprise, et les trois problèmes que ça ne règle pas.</p>
 </div></section>
 </main>
 <script src="app.js"></script></body></html>
