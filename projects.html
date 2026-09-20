@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Projects | Ons Abderrahim</title><meta name="description" content="Computer vision, LLM systems and research code. YOLOv5 detection, benchmark evaluation, RAG pipelines, domain adaptation implementations.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="head"><div class="wrap">
+  <a class="brand" href="index.html">Ons Abderrahim</a>
+  <nav class="nav">
+    <a href="index.html">Home</a><a href="work.html">Work</a><a href="projects.html">Projects</a>
+    <a href="research.html">Research</a><a href="writing.html">Writing</a><a href="about.html">About</a>
+    <button id="lang">FR</button>
+  </nav>
+</div></header>
+<section class="hero"><span class="tick tl"></span><span class="tick br"></span><div class="wrap">
+  <p class="lab" data-en>Projects</p><p class="lab" data-fr>Projets</p>
+  <h1 data-en>Things I built to find something out</h1>
+  <h1 data-fr>Des choses construites pour découvrir quelque chose</h1>
+  <p class="dek" data-en>Grouped by what they are for. Where the code is public, the title links to GitHub. A few are academic or course projects with no public repo, and those are marked.</p>
+  <p class="dek" data-fr>Regroupés par finalité. Quand le code est public, le titre mène à GitHub. Quelques-uns sont des projets académiques ou de cours sans dépôt public, et ils sont signalés.</p>
+</div></section>
+<main>
+<section><div class="wrap">
+
+<div class="grp"><div class="gh">
+  <h3 data-en>Computer vision</h3><h3 data-fr>Vision par ordinateur</h3>
+  <span class="c" data-en>5 projects</span><span class="c" data-fr>5 projets</span></div>
+  <div class="plist"><a class="proj" href="https://github.com/ons-abderrahim/operator-variation-eval" target="_blank" rel="noopener">
+  <div class="ph"><h4 data-en>How much of a score comes from knowing the person<span class="metric">5.5x chance</span></h4><h4 data-fr>Ce que le score doit au fait de connaître la personne<span class="metric">5,5x le hasard</span></h4><span class="repo">operator-variation-eval &nearr;</span></div>
+  <p data-en>Assembly101 splits its data by object, so all 48 operators end up on both sides of every split. Three splits over the same data show what that hides: operator identity is recoverable from the labels alone, a model with no video matches the published video baseline, and per-person scores differ by 19 points under a split whose overall number says the operator does not matter. Every claim has a control next to it, and the one ambiguous recording was dropped rather than guessed.</p><p data-fr>Assembly101 découpe ses données par objet, donc les 48 opérateurs se retrouvent des deux côtés de chaque découpage. Trois découpages sur les mêmes données montrent ce que ça cache : l'identité de l'opérateur se retrouve à partir des seules étiquettes, un modèle sans vidéo égale la référence vidéo publiée, et les scores par personne diffèrent de 19 points sous un découpage dont le chiffre global dit que l'opérateur n'importe pas. Chaque affirmation a son contrôle, et le seul enregistrement ambigu a été retiré plutôt que deviné.</p>
+  <div class="tags">Python · scikit-learn · gradient boosting · permutation test · 18 tests</div></a><a class="proj" href="https://github.com/ons-abderrahim/Hard_hat_detection" target="_blank" rel="noopener">
+  <div class="ph"><h4 data-en>Hard hat detection on site footage</h4><h4 data-fr>Détection de casques de chantier</h4><span class="repo">Hard_hat_detection &nearr;</span></div>
+  <p data-en>YOLOv5 trained to spot hard hats in images and video, under different angles and lighting. Safety monitoring on a worksite is the same shape of problem as quality inspection: small objects, bad angles, and a cost every time you miss one.</p><p data-fr>YOLOv5 entraîné à repérer les casques sur images et vidéo, sous différents angles et éclairages. La surveillance de sécurité sur un chantier a la même forme qu'une inspection qualité : petits objets, mauvais angles, et un coût à chaque détection manquée.</p>
+  <div class="tags">YOLOv5 · PyTorch · OpenCV · video inference</div></a><div class="proj">
+  <div class="ph"><h4 data-en>Smart classroom vision system<span class="metric">96% accuracy</span></h4><h4 data-fr>Système de vision pour salle de classe<span class="metric">96 % d'exactitude</span></h4><span class="repo">private</span></div>
+  <p data-en>A Raspberry Pi setup that finds people and objects in a live classroom, running inference on the device itself, with visual and audio feedback for accessibility.</p><p data-fr>Un montage sur Raspberry Pi qui repère personnes et objets dans une salle de classe en direct, avec l'inférence sur l'appareil lui-même et un retour visuel et sonore pour l'accessibilité.</p>
+  <div class="tags">Python · OpenCV · Dlib · Haar cascades · FaceNet · Node-RED · Raspberry Pi</div></div><div class="proj">
+  <div class="ph"><h4 data-en>Traffic sign detection and self-driving navigation<span class="metric">94.7% confidence</span></h4><h4 data-fr>Détection de panneaux et navigation autonome<span class="metric">94,7 % de confiance</span></h4><span class="repo">private</span></div>
+  <p data-en>YOLOv5 trained to find and classify road signs, then put inside a small self-driving vehicle that decides where to go from a live camera feed.</p><p data-fr>YOLOv5 entraîné à trouver et classer des panneaux routiers, puis embarqué dans un petit véhicule autonome qui décide où aller à partir du flux caméra.</p>
+  <div class="tags">YOLOv5 · OpenCV · Arduino · Raspberry Pi</div></div><div class="proj">
+  <div class="ph"><h4 data-en>Image captioning with a CNN and a transformer</h4><h4 data-fr>Description d'images par CNN et transformeur</h4><span class="repo">private</span></div>
+  <p data-en>A ResNet feature extractor paired with a transformer decoder, trained on Flickr8k and scored with BLEU. My first work on the line between vision and language.</p><p data-fr>Un extracteur ResNet couplé à un décodeur transformeur, entraîné sur Flickr8k et évalué au BLEU. Mon premier travail à la frontière entre vision et langage.</p>
+  <div class="tags">PyTorch · ResNet · Hugging Face Transformers · BLEU</div></div></div></div>
+
+<div class="grp"><div class="gh">
+  <h3 data-en>LLM systems and retrieval</h3><h3 data-fr>Systèmes LLM et récupération</h3>
+  <span class="c" data-en>4 projects</span><span class="c" data-fr>4 projets</span></div>
+  <div class="plist"><a class="proj" href="https://github.com/ons-abderrahim/rag-qa-chatbot" target="_blank" rel="noopener">
+  <div class="ph"><h4 data-en>Question answering over a document set</h4><h4 data-fr>Questions-réponses sur un ensemble de documents</h4><span class="repo">rag-qa-chatbot &nearr;</span></div>
+  <p data-en>A chatbot that pulls the relevant passages out of a document collection and answers from them. Vector search, a chunking strategy, and every response logged.</p><p data-fr>Un agent qui extrait les passages pertinents d'une collection de documents et répond à partir d'eux. Recherche vectorielle, stratégie de découpage, et chaque réponse journalisée.</p>
+  <div class="tags">Python · FAISS · OpenAI API · LangChain</div></a><div class="proj">
+  <div class="ph"><h4 data-en>Legal assistant</h4><h4 data-fr>Assistant juridique</h4><span class="repo">private</span></div>
+  <p data-en>A retrieval pipeline over a large legal corpus with LLaMA-2 and LangChain, a FAISS index, and an interface that shows the source passage next to every answer so the reader can check it.</p><p data-fr>Un pipeline de récupération sur un vaste corpus juridique avec LLaMA-2 et LangChain, un index FAISS, et une interface qui affiche le passage source à côté de chaque réponse pour que le lecteur vérifie.</p>
+  <div class="tags">LLaMA-2 · LangChain · FAISS · Streamlit · Python</div></div><div class="proj">
+  <div class="ph"><h4 data-en>Is prompting enough, or do you need to fine-tune</h4><h4 data-fr>Le prompt suffit-il, ou faut-il affiner</h4><span class="repo">private</span></div>
+  <p data-en>Zero-shot prompting compared against fine-tuned transformers on IMDb sentiment, with accuracy and F1 tracked automatically and a cost comparison, so the answer is which one is worth deploying rather than which one scores higher.</p><p data-fr>Prompting zero-shot comparé à des transformeurs affinés sur le sentiment IMDb, avec exactitude et F1 suivis automatiquement et une comparaison des coûts, pour répondre non pas lequel marque le plus mais lequel mérite d'être déployé.</p>
+  <div class="tags">Python · Hugging Face · OpenAI API · scikit-learn</div></div><div class="proj">
+  <div class="ph"><h4 data-en>Checking code written by a model</h4><h4 data-fr>Vérifier du code écrit par un modèle</h4><span class="repo">private</span></div>
+  <p data-en>A pipeline that runs unit tests against AI-generated Python, sorts the failures by type, and reports on correctness, speed and how it tends to break.</p><p data-fr>Un pipeline qui teste unitairement du code Python généré par IA, trie les échecs par type, et rend compte de la justesse, de la vitesse et des manières de casser.</p>
+  <div class="tags">Python · Pytest · GitHub Actions · pandas</div></div></div></div>
+
+<div class="grp"><div class="gh">
+  <h3 data-en>Research code and data</h3><h3 data-fr>Code de recherche et données</h3>
+  <span class="c" data-en>4 projects</span><span class="c" data-fr>4 projets</span></div>
+  <div class="plist"><a class="proj" href="https://github.com/ons-abderrahim/sb-ai-dashboard" target="_blank" rel="noopener">
+  <div class="ph"><h4 data-en>Smart building dashboard</h4><h4 data-fr>Tableau de bord pour bâtiments intelligents</h4><span class="repo">sb-ai-dashboard &nearr;</span></div>
+  <p data-en>A dashboard that takes in sensor time series, runs the occupancy models from my thesis, predicts heating and cooling load, flags anomalies, and explains its own output in plain language. The research made usable.</p><p data-fr>Un tableau de bord qui ingère des séries temporelles de capteurs, exécute les modèles d'occupation de mon mémoire, prédit la charge de chauffage et de climatisation, signale les anomalies, et explique ses sorties en langage clair. La recherche rendue utilisable.</p>
+  <div class="tags">Python · PyTorch · time series · anomaly detection · LLM explanations</div></a><a class="proj" href="https://github.com/ons-abderrahim/OSDA-to--Improve-Occupancy-Estimation-and-Activity-Recognition-in-Smart-Buildings" target="_blank" rel="noopener">
+  <div class="ph"><h4 data-en>Open-set domain adaptation for smart buildings</h4><h4 data-fr>Adaptation de domaine ouverte pour bâtiments intelligents</h4><span class="repo">OSDA &nearr;</span></div>
+  <p data-en>Code for the Journal of Building Engineering paper. Four ways of handling the case where the model meets a category it was never trained on: backpropagation-based, soft rejection, unknown-aware adversarial learning, and adjustment and alignment.</p><p data-fr>Code de l'article du Journal of Building Engineering. Quatre façons de traiter le cas où le modèle rencontre une catégorie jamais apprise : par rétropropagation, par rejet souple, par apprentissage adversarial conscient de l'inconnu, et par ajustement et alignement.</p>
+  <div class="tags">Python · PyTorch · adversarial training · open-set evaluation</div></a><a class="proj" href="https://github.com/ons-abderrahim/GDA-to-Improve-Activity-Recognition-in-Smart-Buildings" target="_blank" rel="noopener">
+  <div class="ph"><h4 data-en>Generalised domain adaptation for activity recognition</h4><h4 data-fr>Adaptation de domaine généralisée pour la reconnaissance d'activités</h4><span class="repo">GDA-to-Improve-Activity-Recognition &nearr;</span></div>
+  <p data-en>Reference code for the Energy and Buildings paper. Domain adaptation on IoT sensor data so activity recognition holds up in buildings it was never trained on.</p><p data-fr>Code de référence pour l'article d'Energy and Buildings. Adaptation de domaine sur données de capteurs IoT pour que la reconnaissance d'activités tienne dans des bâtiments jamais vus.</p>
+  <div class="tags">Python · PyTorch · domain adaptation · IoT sensor data</div></a><a class="proj" href="https://github.com/ons-abderrahim/UniDA-or-Occupant-Centric-Sensing-Under-Partial-Label-Space-Overlap" target="_blank" rel="noopener">
+  <div class="ph"><h4 data-en>Universal domain adaptation when the label sets only partly overlap</h4><h4 data-fr>Adaptation universelle quand les ensembles d'étiquettes se recoupent en partie</h4><span class="repo">UniDA &nearr;</span></div>
+  <p data-en>Code for the Building Simulation 2025 paper. The new building shares some categories with the old one and not others, and the model is not told which is which.</p><p data-fr>Code de l'article Building Simulation 2025. Le nouveau bâtiment partage certaines catégories avec l'ancien et pas d'autres, et le modèle ne sait pas lesquelles.</p>
+  <div class="tags">Python · PyTorch · universal domain adaptation · sensor data</div></a></div></div>
+
+<p class="muted" style="margin-top:40px" data-en>Twenty repositories in total. <a href="https://github.com/ons-abderrahim">The rest are on GitHub</a>.</p>
+<p class="muted" style="margin-top:40px" data-fr>Vingt dépôts au total. <a href="https://github.com/ons-abderrahim">Le reste se trouve sur GitHub</a>.</p>
+</div></section>
+</main><script src="app.js"></script></body></html>

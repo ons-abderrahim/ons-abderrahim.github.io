@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ons Abderrahim, Machine Learning Engineer</title><meta name="description" content="Machine learning engineer in Montréal. Domain adaptation research, an LLM agent running in production, and honest evaluation of computer vision benchmarks.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="head"><div class="wrap">
+  <a class="brand" href="index.html">Ons Abderrahim</a>
+  <nav class="nav">
+    <a href="index.html">Home</a><a href="work.html">Work</a><a href="projects.html">Projects</a><a href="research.html">Research</a>
+    <a href="writing.html">Writing</a><a href="about.html">About</a>
+    <button id="lang">FR</button>
+  </nav>
+</div></header>
+<section class="hero"><span class="tick tl"></span><span class="tick br"></span><div class="wrap">
+  <p class="lab" data-en>Machine learning engineer &middot; Montréal</p>
+  <p class="lab" data-fr>Ingénieure en apprentissage automatique &middot; Montréal</p>
+  <h1 data-en>I build machine learning systems, then I <span class="sw">find where they break.</span></h1>
+  <h1 data-fr>Je construis des systèmes d'apprentissage automatique, puis <span class="sw">je cherche où ils cassent.</span></h1>
+  <p class="dek" data-en>Master's from Concordia. Three papers on domain adaptation, first author on all three. Then a year at Bauer Hockey, checking how much of that research still holds up on a real production line.</p>
+  <p class="dek" data-fr>Maîtrise à Concordia. Trois articles sur l'adaptation de domaine, première auteure des trois. Puis un an chez Bauer Hockey, à vérifier ce qui tient de cette recherche sur une vraie ligne de production.</p>
+  <div class="cta">
+    <a class="btn btn-a" href="work.html" data-en>See the work</a><a class="btn btn-a" href="work.html" data-fr>Voir les travaux</a>
+    <a class="btn btn-b" href="writing.html" data-en>Read the write-up</a><a class="btn btn-b" href="writing.html" data-fr>Lire l'article</a>
+  </div>
+</div></section>
+
+<section class="stats" style="padding:0"><div class="wrap" style="padding-left:0;padding-right:0"><div class="grid">
+  <div class="stat"><div class="n"><span data-to="3">3</span></div><div class="t" data-en>Papers, first author</div><div class="t" data-fr>Articles, première auteure</div></div>
+  <div class="stat"><div class="n"><span data-to="7780">7,780</span></div><div class="t" data-en>Defect records in production</div><div class="t" data-fr>Enregistrements de défauts en production</div></div>
+  <div class="stat"><div class="n"><span data-to="90.1" data-suf="%">90.1%</span></div><div class="t" data-en>Accuracy in a building never seen</div><div class="t" data-fr>Précision dans un bâtiment jamais vu</div></div>
+  <div class="stat"><div class="n"><span data-to="0">0</span></div><div class="t" data-en>Wrong numbers shown in a meeting</div><div class="t" data-fr>Chiffres erronés montrés en réunion</div></div>
+</div></div></section>
+
+<main>
+<section><div class="wrap narrow">
+  <div class="shead"><span class="idx">01</span><h2 data-en>What the work has in common</h2><h2 data-fr>Ce que les travaux ont en commun</h2></div>
+  <p class="lead" data-en>Almost everything I have built comes back to one question. What happens when a model meets something it was not trained on?</p>
+  <p class="lead" data-fr>Presque tout ce que j'ai construit revient à une seule question. Que se passe-t-il quand un modèle rencontre quelque chose pour quoi il n'a pas été entraîné ?</p>
+  <p data-en>A new building. A new operator. A new camera angle. In research this has a name, domain shift, and a lot of papers behind it. On a factory floor it is just a normal week, and nobody warns you which day it will happen.</p>
+  <p data-fr>Un nouveau bâtiment. Un nouvel opérateur. Un nouvel angle de caméra. En recherche, ça porte un nom, le décalage de domaine, et beaucoup d'articles s'y consacrent. En usine, c'est une semaine ordinaire, et personne ne vous prévient du jour où ça arrivera.</p>
+  <p data-en>My master's research studied this across buildings that shared almost nothing, including the harder case where the model meets a category it was never taught and has to admit it does not know. Then I spent a year at Bauer Hockey, where the same problem showed up on a production line. There, one wrong number in one meeting was enough to lose the team for good.</p>
+  <p data-fr>Mes travaux de maîtrise ont étudié ça sur des bâtiments n'ayant presque rien en commun, y compris le cas plus difficile où le modèle rencontre une catégorie jamais apprise et doit admettre qu'il ne sait pas. Puis j'ai passé un an chez Bauer Hockey, où le même problème est apparu sur une ligne de production. Là, un seul chiffre erroné en réunion suffisait à perdre l'équipe pour de bon.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="shead"><span class="idx">02</span><h2 data-en>Selected work</h2><h2 data-fr>Travaux choisis</h2></div>
+  <div class="cards">
+    <a class="card" href="work.html#bauer">
+      <div class="k">Bauer Hockey &middot; 2026</div>
+      <h3 data-en>An AI agent that has never shown a wrong number</h3><h3 data-fr>Un agent IA qui n'a jamais affiché un chiffre erroné</h3>
+      <p data-en>A Llama 3.3 70B running on site, writing the weekly defect report for a skate production line. The interesting part is not the model. It is the layer that checks every figure before anyone reads it.</p>
+      <p data-fr>Un Llama 3.3 70B hébergé sur site, qui rédige le rapport hebdomadaire des défauts d'une ligne de production de patins. L'intéressant n'est pas le modèle. C'est la couche qui vérifie chaque chiffre avant que quiconque le lise.</p>
+      <div class="go" data-en>Read the case study &rarr;</div><div class="go" data-fr>Lire l'étude de cas &rarr;</div>
+    </a>
+    <a class="card" href="work.html#assembly">
+      <div class="k">Assembly101 &middot; 2026</div>
+      <h3 data-en>The benchmark that never tests a new operator</h3><h3 data-fr>Le benchmark qui ne teste jamais un nouvel opérateur</h3>
+      <p data-en>Assembly101 splits its data by object, never by person. All 48 operators sit in the training set. I measured what that hides, and put the code and the numbers on GitHub.</p>
+      <p data-fr>Assembly101 découpe ses données par objet, jamais par personne. Les 48 opérateurs sont tous dans l'entraînement. J'ai mesuré ce que ça cache, et publié le code et les chiffres sur GitHub.</p>
+      <div class="go" data-en>Read the case study &rarr;</div><div class="go" data-fr>Lire l'étude de cas &rarr;</div>
+    </a>
+    <a class="card" href="work.html#schneider">
+      <div class="k">Schneider Electric &amp; Concordia &middot; 2024&ndash;2025</div>
+      <h3 data-en>Models that still work in a building they have never seen</h3><h3 data-fr>Des modèles qui fonctionnent encore dans un bâtiment jamais vu</h3>
+      <p data-en>Domain adaptation on IoT sensor data, including the case where the model meets classes nobody taught it. 90.1% on occupancy, 88.1% on activity in a new building, three papers.</p>
+      <p data-fr>Adaptation de domaine sur données de capteurs IoT, y compris le cas où le modèle rencontre des classes que personne ne lui a apprises. 90,1 % en occupation, 88,1 % en activité dans un nouveau bâtiment, trois articles.</p>
+      <div class="go" data-en>Read the case study &rarr;</div><div class="go" data-fr>Lire l'étude de cas &rarr;</div>
+    </a>
+  </div>
+</div></section>
+
+<section><div class="wrap narrow">
+  <div class="shead"><span class="idx">03</span><h2 data-en>How I stopped the model getting numbers wrong</h2><h2 data-fr>Comment j'ai empêché le modèle de se tromper de chiffre</h2></div>
+  <figure class="fig">
+<svg viewBox="0 0 860 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Verification loop">
+  <g font-family="IBM Plex Mono, monospace" font-size="11.5">
+    <rect x="4" y="58" width="118" height="52" rx="5" fill="#EFEBE2" stroke="#DDD7C9"/>
+    <text x="63" y="82" text-anchor="middle" fill="#55646F">defect</text>
+    <text x="63" y="97" text-anchor="middle" fill="#55646F">records</text>
+
+    <rect x="168" y="58" width="132" height="52" rx="5" fill="#0E1821" stroke="#1E2E3C"/>
+    <text x="234" y="82" text-anchor="middle" fill="#D4326B" font-weight="500">Python</text>
+    <text x="234" y="97" text-anchor="middle" fill="#8FA3B2">computes</text>
+
+    <rect x="346" y="58" width="132" height="52" rx="5" fill="#FFFDF9" stroke="#DDD7C9"/>
+    <text x="412" y="82" text-anchor="middle" fill="#26323C">LLM writes</text>
+    <text x="412" y="97" text-anchor="middle" fill="#8A949D">prose only</text>
+
+    <rect x="524" y="58" width="132" height="52" rx="5" fill="#0E1821" stroke="#1E2E3C"/>
+    <text x="590" y="82" text-anchor="middle" fill="#D4326B" font-weight="500">verify</text>
+    <text x="590" y="97" text-anchor="middle" fill="#8FA3B2">every figure</text>
+
+    <rect x="702" y="30" width="154" height="46" rx="5" fill="#EFEBE2" stroke="#DDD7C9"/>
+    <text x="779" y="58" text-anchor="middle" fill="#26323C">published</text>
+
+    <rect x="702" y="94" width="154" height="46" rx="5" fill="#FBE7EF" stroke="#D4326B"/>
+    <text x="779" y="115" text-anchor="middle" fill="#7A1739">deterministic</text>
+    <text x="779" y="130" text-anchor="middle" fill="#7A1739">template</text>
+
+    <g class="draw" stroke="#8A949D" stroke-width="1.2" fill="none">
+      <path d="M122 84 H168"/><path d="M300 84 H346"/><path d="M478 84 H524"/>
+      <path d="M656 84 H680 V53 H702"/><path d="M656 84 H680 V117 H702"/>
+    </g>
+    <g class="fade">
+      <text x="672" y="46" fill="#55646F" font-size="10.5">pass</text>
+      <text x="666" y="140" fill="#D4326B" font-size="10.5">2 fails</text>
+      <path d="M412 118 V150 H234 V110" stroke="#D4326B" stroke-width="1.1" fill="none" stroke-dasharray="3 3"/>
+      <text x="300" y="164" text-anchor="middle" fill="#D4326B" font-size="10.5">facts, pre-formatted</text>
+    </g>
+  </g>
+</svg>
+<figcaption data-en>The model never writes a number. Python works out every figure and hands it over already formatted. The model only writes the sentences around them. Every number in the text is then checked against the source data before anyone sees it.</figcaption>
+<figcaption data-fr>Le modèle n'écrit jamais un nombre. Python calcule chaque chiffre et le transmet déjà mis en forme. Le modèle n'écrit que les phrases autour. Chaque nombre du texte est ensuite comparé aux données sources avant que quiconque le voie.</figcaption>
+</figure>
+  <p data-en>One wrong number in one meeting and nobody opens the tool again. So the target was not high accuracy. It was zero. <a href="writing.html">I wrote up how it works</a>, including the part I did not see coming and the three problems it still does not fix.</p>
+  <p data-fr>Un seul chiffre erroné en réunion et plus personne n'ouvre l'outil. L'objectif n'était donc pas une haute précision. C'était zéro. <a href="writing.html">J'ai expliqué comment ça fonctionne</a>, avec ce que je n'avais pas vu venir et les trois problèmes que ça ne règle toujours pas.</p>
+</div></section>
+</main>
+<script src="app.js"></script></body></html>

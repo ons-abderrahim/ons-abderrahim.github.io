@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Work | Ons Abderrahim</title>
+<meta name="description" content="Four case studies: an LLM agent in production at Bauer Hockey, domain adaptation at Schneider Electric, a vision pipeline at Hydatis, and operator variation in Assembly101.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="head"><div class="wrap">
+  <a class="brand" href="index.html">Ons Abderrahim</a>
+  <nav class="nav">
+    <a href="index.html">Home</a><a href="work.html">Work</a><a href="projects.html">Projects</a><a href="research.html">Research</a>
+    <a href="writing.html">Writing</a><a href="about.html">About</a>
+    <button id="lang">FR</button>
+  </nav>
+</div></header>
+
+<main>
+<section class="hero"><span class="tick tl"></span><span class="tick br"></span><div class="wrap">
+  <p class="lab" data-en>Work</p><p class="lab" data-fr>Travaux</p>
+  <h1 data-en>Four things I built, and what each one taught me</h1>
+  <h1 data-fr>Quatre choses que j'ai construites, et ce que chacune m'a appris</h1>
+</div></section>
+
+<section><div class="wrap narrow">
+<div class="case" id="bauer">
+  <p class="k">BAUER HOCKEY · BLAINVILLE QC · 2026</p>
+  <h2 data-en>An AI agent that has never shown a wrong number</h2>
+  <h2 data-fr>Un agent IA qui n'a jamais affiché un chiffre erroné</h2>
+  <p class="muted" data-en>AI and machine learning intern, skate production line</p>
+  <p class="muted" data-fr>Stagiaire IA et apprentissage automatique, ligne de production de patins</p>
+
+  <div class="blk"><p class="lab lab-sig" data-en>The brief</p><p class="lab lab-sig" data-fr>Le mandat</p>
+  <p data-en>A laptop and a broad question: find out what AI could do for quality on the production line. There was no ML team above me, no pipeline already in place, and production data that was not allowed to leave the building.</p>
+  <p data-fr>Un portable et une question large : découvrir ce que l'IA pouvait apporter à la qualité sur la ligne de production. Aucune équipe ML au-dessus de moi, aucun pipeline en place, et des données de production interdites de sortie du site.</p></div>
+
+  <div class="blk"><p class="lab lab-sig" data-en>What I built</p><p class="lab lab-sig" data-fr>Ce que j'ai construit</p>
+  <p data-en>An agent that writes the weekly defect report the quality team works from. It runs on a self-hosted Llama 3.3 70B through vLLM, with Qdrant for retrieval, entirely on site. Under it sits an ingestion pipeline with eight cleaning rules over <span class="num">7,780</span> defect records and 60 weeks of history: removing duplicates, fixing timezones, and turning raw counts into a rate per 100 units.</p>
+  <p data-fr>Un agent qui rédige le rapport hebdomadaire des défauts utilisé par l'équipe qualité. Il tourne sur un Llama 3.3 70B auto-hébergé via vLLM, avec Qdrant pour la récupération, entièrement sur site. En dessous, un pipeline d'ingestion à huit règles de nettoyage sur <span class="num">7 780</span> enregistrements de défauts et 60 semaines d'historique : dédoublonnage, correction des fuseaux horaires, et passage des comptes bruts à un taux par 100 unités.</p>
+  <p data-en>Next to it, a classifier that sorts <span class="num">2,163</span> free-text operator comments into 41 standard codes. The comments mix French and English in the same field and are written in a hurry. Fuzzy matching first, then multilingual sentence embeddings, with a confidence score on every prediction so the uncertain ones go to a person instead of being filed in silence.</p>
+  <p data-fr>À côté, un classifieur qui range <span class="num">2 163</span> commentaires libres d'opérateurs dans 41 codes standards. Ces commentaires mêlent français et anglais dans le même champ et sont écrits à la hâte. Appariement flou d'abord, puis embeddings de phrases multilingues, avec un score de confiance sur chaque prédiction pour que les cas incertains aillent vers une personne plutôt que d'être classés en silence.</p>
+  <p data-en>And a web app used at the station itself. A USB foot pedal takes the picture, so the operator never lets go of the work. Two user roles, a workflow for deviations, and 3% of parts pulled at random for a second check.</p>
+  <p data-fr>Et une application web utilisée au poste même. Une pédale USB déclenche la photo, pour que l'opérateur ne lâche jamais son travail. Deux rôles d'utilisateur, un flux pour les dérogations, et 3 % des pièces tirées au hasard pour une seconde vérification.</p></div>
+
+  <div class="blk"><p class="lab lab-sig" data-en>What went wrong</p><p class="lab lab-sig" data-fr>Ce qui a mal tourné</p>
+  <blockquote><p data-en>The first version worked straight away. It also printed a percentage I had never calculated. The arithmetic was right, the tone was confident, and nothing about it had been checked. Nobody in that meeting would have caught it.</p>
+  <p data-fr>La première version a marché du premier coup. Elle a aussi imprimé un pourcentage que je n'avais jamais calculé. L'arithmétique était juste, le ton assuré, et rien n'avait été vérifié. Personne dans cette réunion ne l'aurait relevé.</p></blockquote>
+  <p data-en>A reporting tool does not lose trust slowly. It loses it all at once. One wrong number in one meeting and nobody opens it again, and worse, they stop believing the three numbers it got right.</p>
+  <p data-fr>Un outil de reporting ne perd pas la confiance petit à petit. Il la perd d'un coup. Un seul chiffre erroné en réunion et plus personne ne l'ouvre, et pire, on cesse de croire les trois chiffres qui étaient justes.</p></div>
+
+  <div class="blk"><p class="lab lab-sig" data-en>The fix</p><p class="lab lab-sig" data-fr>La correction</p>
+  <p data-en>Python works out every figure. The model receives them already calculated and already formatted, and its only job is to write French sentences around numbers it was handed. Once it has written, every number in the text is compared against the values Python produced. Two failures and the system stops trying to write well and prints a fixed template instead. That template is stiff and repetitive. It also cannot be wrong.</p>
+  <p data-fr>Python calcule chaque chiffre. Le modèle les reçoit déjà calculés et déjà mis en forme, et son unique rôle est d'écrire des phrases françaises autour de valeurs qu'on lui a données. Une fois le texte écrit, chaque nombre est comparé aux valeurs produites par Python. Deux échecs et le système cesse de chercher à bien écrire et imprime un gabarit fixe. Ce gabarit est rigide et répétitif. Il ne peut pas non plus se tromper.</p>
+  <p data-en><a href="writing.html">I wrote this one up in full</a>, including the part I did not see coming and the three problems it still does not fix.</p>
+  <p data-fr><a href="writing.html">J'en ai fait un article complet</a>, avec ce que je n'avais pas vu venir et les trois problèmes que ça ne règle toujours pas.</p></div>
+
+  <p class="stack">Python · vLLM · Llama 3.3 70B · Qdrant · sentence-transformers · Streamlit · Flask · PostgreSQL · AWS · Parquet · DuckDB · Linux over SSH, no root</p>
+</div>
+
+<div class="case" id="assembly">
+  <p class="k">ASSEMBLY101 · 2026</p>
+  <h2 data-en>The benchmark that never tests a new operator</h2>
+  <h2 data-fr>Le benchmark qui ne teste jamais un nouvel opérateur</h2>
+  <p class="muted" data-en>Personal project &middot; <a href="https://github.com/ons-abderrahim/operator-variation-eval" target="_blank" rel="noopener">code and full results on GitHub</a></p>
+  <p class="muted" data-fr>Projet personnel &middot; <a href="https://github.com/ons-abderrahim/operator-variation-eval" target="_blank" rel="noopener">code et résultats complets sur GitHub</a></p>
+
+  <div class="blk"><p class="lab lab-sig" data-en>The gap</p><p class="lab lab-sig" data-fr>La lacune</p>
+  <p data-en>Benchmarks for action recognition in video split their data by object, not by person. They can tell you whether a model handles a new product. They cannot tell you whether it handles a new person doing the same job their own way. On a production line, that is the question that matters.</p>
+  <p data-fr>Les benchmarks de reconnaissance d'actions en vidéo découpent leurs données par objet, pas par personne. Ils peuvent dire si un modèle gère un nouveau produit. Ils ne peuvent pas dire s'il gère une nouvelle personne qui fait le même travail à sa façon. Sur une ligne de production, c'est cette question qui compte.</p></div>
+
+  <div class="blk"><p class="lab lab-sig" data-en>What I measured</p><p class="lab lab-sig" data-fr>Ce que j'ai mesuré</p>
+  <p data-en>Three splits over the same data, with the same model and the same test sizes. Shuffle every segment. Keep whole recordings together. Keep whole operators together. The only thing that changes is what is allowed to appear on both sides. 1,013,523 annotation rows, 84,255 real segments, 48 operators, 24 verbs.</p>
+  <p data-fr>Trois découpages sur les mêmes données, avec le même modèle et les mêmes tailles de test. Mélanger tous les segments. Garder les enregistrements entiers ensemble. Garder les opérateurs entiers ensemble. La seule chose qui change est ce qui a le droit d'apparaître des deux côtés. 1 013 523 lignes d'annotation, 84 255 segments réels, 48 opérateurs, 24 verbes.</p></div>
+
+  <div class="blk"><p class="lab lab-sig" data-en>What came out</p><p class="lab lab-sig" data-fr>Ce qui en est ressorti</p>
+  <p data-en><strong>Nobody is held out.</strong> All 48 operators are in the training split. Every single recording in validation and test belongs to a person the model has already trained on. This is not a partial overlap. There is no operator holdout at all.</p>
+  <p data-fr><strong>Personne n'est retenu.</strong> Les 48 opérateurs sont dans l'entraînement. Chaque enregistrement de validation et de test appartient à une personne sur laquelle le modèle s'est déjà entraîné. Ce n'est pas un recouvrement partiel. Il n'y a aucun opérateur retenu.</p>
+  <p data-en><strong>You can tell operators apart from the labels alone.</strong> Guessing which of 48 people made a recording, using only their mix of verbs and how fast they work, lands at <span class="num">5.5 times</span> chance. No images involved. The signal is already in the data before a model looks at a single frame, and the splits hand it over on both sides.</p>
+  <p data-fr><strong>On distingue les opérateurs à partir des seules étiquettes.</strong> Deviner laquelle des 48 personnes a fait un enregistrement, avec pour seules entrées son mélange de verbes et sa vitesse, atteint <span class="num">5,5 fois</span> le hasard. Aucune image. Le signal est déjà dans les données avant qu'un modèle regarde une image, et les découpages le livrent des deux côtés.</p>
+  <p data-en><strong>A model with no video matches the published video baseline.</strong> On all 24 verbs, with no images at all, it reaches <span class="num">0.576</span> top-1 against the published TSM result of <span class="num">0.585</span>. So a large part of this benchmark can be solved by knowing the order of the work, and a model can score well here while learning very little about hands and parts.</p>
+  <p data-fr><strong>Un modèle sans vidéo égale la référence vidéo publiée.</strong> Sur les 24 verbes, sans aucune image, il atteint <span class="num">0,576</span> en top-1 contre <span class="num">0,585</span> pour le TSM publié. Une bonne partie de ce benchmark se résout donc en connaissant l'ordre du travail, et un modèle peut bien y figurer tout en apprenant très peu sur les mains et les pièces.</p>
+  <p data-en><strong>The average hides the spread.</strong> Holding operators out costs almost nothing overall. But per person the scores run from <span class="num">0.404</span> to <span class="num">0.599</span>, a 19 point spread under a split whose headline number says the operator does not matter.</p>
+  <p data-fr><strong>La moyenne cache l'écart.</strong> Retenir les opérateurs ne coûte presque rien globalement. Mais par personne, les scores vont de <span class="num">0,404</span> à <span class="num">0,599</span>, soit 19 points d'écart sous un découpage dont le chiffre global dit que l'opérateur n'a pas d'importance.</p></div>
+
+  <div class="blk"><p class="lab lab-sig" data-en>Why I believe the zero</p><p class="lab lab-sig" data-fr>Pourquoi je crois ce zéro</p>
+  <p data-en>A setup that cannot find a gap also reports zero, so a zero proves nothing on its own. The same setup does find a 2.8 point leak from keeping recordings together, sitting right next to the one it does not find. Two planted checks confirm it catches an effect that is definitely there, and loses it once the effect is removed.</p>
+  <p data-fr>Un montage incapable de trouver un écart rapporte aussi zéro, donc un zéro ne prouve rien en soi. Le même montage trouve bel et bien une fuite de 2,8 points liée au fait de garder les enregistrements ensemble, juste à côté de celle qu'il ne trouve pas. Deux contrôles plantés confirment qu'il détecte un effet réellement présent, et qu'il le perd une fois l'effet retiré.</p>
+  <p data-en>For the spread, shuffling which operator each recording belongs to gives 0.097 on average. The real spread beats all twelve shuffles, which puts p at 0.077. That is the lowest p twelve shuffles can produce, so it points the right way without proving anything. Per-operator scores also line up at Spearman 0.83 across two different models, and the hardest operator is the same one every time.</p>
+  <p data-fr>Pour l'écart, mélanger l'opérateur attribué à chaque enregistrement donne 0,097 en moyenne. L'écart réel dépasse les douze mélanges, ce qui place p à 0,077. C'est le plus petit p que douze mélanges permettent, donc ça pointe dans le bon sens sans rien prouver. Les scores par opérateur s'alignent aussi à 0,83 de Spearman entre deux modèles différents, et l'opérateur le plus difficile est toujours le même.</p></div>
+
+  <div class="blk"><p class="lab lab-sig" data-en>Two problems in the data</p><p class="lab lab-sig" data-fr>Deux problèmes dans les données</p>
+  <p data-en>Both turned up while grouping by person, and both are invisible to anyone splitting by object. Every action is labelled once per camera, so a million rows are really 84,255 segments, and shuffling them puts the same action in training and test from two angles. And the recording name carries the operator id twice, with 7 of 362 disagreeing. Six were harmless aliases. One could not be decided, so I dropped it rather than guess.</p>
+  <p data-fr>Les deux sont apparus en regroupant par personne, et les deux sont invisibles pour qui découpe par objet. Chaque action est étiquetée une fois par caméra, donc un million de lignes correspond en réalité à 84 255 segments, et les mélanger place la même action dans l'entraînement et le test sous deux angles. Et le nom de l'enregistrement porte deux fois l'identifiant de l'opérateur, avec 7 désaccords sur 362. Six étaient des alias sans conséquence. Un ne pouvait pas être tranché, je l'ai retiré plutôt que de deviner.</p></div>
+
+  <div class="blk"><p class="lab lab-sig" data-en>What is still blocked</p><p class="lab lab-sig" data-fr>Ce qui reste bloqué</p>
+  <p data-en>The TSM video features are behind an access gate that returns 403, and the dataset maintainers have not replied. So the same three splits have not run on video, and I have not watched the hardest operator's footage. Everything above uses the public annotation files only, and one script reproduces the operator findings with no login and no download.</p>
+  <p data-fr>Les caractéristiques vidéo TSM sont derrière un accès qui renvoie 403, et les responsables du jeu de données n'ont pas répondu. Les trois découpages n'ont donc pas tourné sur la vidéo, et je n'ai pas visionné les séquences de l'opérateur le plus difficile. Tout ce qui précède n'utilise que les fichiers d'annotation publics, et un script reproduit les résultats sur les opérateurs sans identifiant ni téléchargement.</p></div>
+
+  <p class="stack">Python · scikit-learn · gradient boosting · permutation test · 18 tests passing · public annotations only</p>
+</div>
+
+<div class="case" id="schneider">
+  <p class="k">SCHNEIDER ELECTRIC &amp; CONCORDIA · 2024–2025</p>
+  <h2 data-en>Models that still work in a building they have never seen</h2>
+  <h2 data-fr>Des modèles qui fonctionnent encore dans un bâtiment jamais vu</h2>
+  <p class="muted" data-en>Machine learning researcher · M.A.Sc. thesis, graded Excellent</p>
+  <p class="muted" data-fr>Chercheuse en apprentissage automatique · mémoire de M.A.Sc., classé Excellent</p>
+
+  <div class="blk"><p class="lab lab-sig" data-en>The problem</p><p class="lab lab-sig" data-fr>Le problème</p>
+  <p data-en>Working out how many people are in a space, and what they are doing, from IoT sensors. The buildings shared almost nothing: different layouts, different sensor positions, different people behaving differently inside them. Train in one, deploy in another, and accuracy drops without your validation score ever warning you.</p>
+  <p data-fr>Déterminer combien de personnes occupent un espace, et ce qu'elles y font, à partir de capteurs IoT. Les bâtiments n'avaient presque rien en commun : agencements différents, positions de capteurs différentes, personnes s'y comportant différemment. Entraînez dans l'un, déployez dans l'autre, et la précision chute sans que le score de validation ne vous prévienne.</p></div>
+
+  <div class="blk"><p class="lab lab-sig" data-en>What I did</p><p class="lab lab-sig" data-fr>Ce que j'ai fait</p>
+  <p data-en>I built open-set and generalised domain adaptation methods, and more importantly I tested them honestly. Whole buildings held out instead of random slices. And the open-set case, where the model meets a category it was never trained on and has to say it does not know, rather than forcing it into the nearest class it does know.</p>
+  <p data-fr>J'ai conçu des méthodes d'adaptation de domaine ouverte et généralisée, et surtout je les ai testées honnêtement. Des bâtiments entiers retenus plutôt que des tranches aléatoires. Et le cas ouvert, où le modèle rencontre une catégorie jamais apprise et doit dire qu'il ne sait pas, au lieu de la forcer dans la classe connue la plus proche.</p>
+  <p data-en><span class="num">90.1%</span> on occupancy, <span class="num">88.1%</span> on activity recognition in a building the model had not seen, and a <span class="num">12%</span> gain where the deployment data differed from the training data. I also planned and installed the sensor network that produced the data, which raised coverage by 90% and taught me more about real data than the modelling did.</p>
+  <p data-fr><span class="num">90,1 %</span> en occupation, <span class="num">88,1 %</span> en reconnaissance d'activités dans un bâtiment que le modèle n'avait pas vu, et <span class="num">12 %</span> de gain là où les données de déploiement différaient de l'entraînement. J'ai aussi planifié et installé le réseau de capteurs qui produisait ces données, ce qui a augmenté la couverture de 90 % et m'a appris plus sur les données réelles que la modélisation.</p></div>
+
+  <div class="blk"><p class="lab lab-sig" data-en>What I took from it</p><p class="lab lab-sig" data-fr>Ce que j'en retiens</p>
+  <p data-en>How you test matters more than what you build. A random split tells you what you want to hear. Holding out a whole building tells you what you are actually going to get.</p>
+  <p data-fr>La façon de tester compte plus que ce qu'on construit. Un découpage aléatoire dit ce qu'on veut entendre. Retenir un bâtiment entier dit ce qu'on obtiendra vraiment.</p></div>
+
+  <p class="stack">PyTorch · TensorFlow · OSDA / UniDA / GDA · time series · GPU training · MLflow</p>
+</div>
+
+<div class="case" id="hydatis">
+  <p class="k">HYDATIS · TUNIS · 2022</p>
+  <h2 data-en>My first vision system in production</h2>
+  <h2 data-fr>Mon premier système de vision en production</h2>
+
+  <div class="blk"><p class="lab lab-sig" data-en>What it was</p><p class="lab lab-sig" data-fr>De quoi il s'agissait</p>
+  <p data-en>A full pipeline over scanned documents that were never twice the same. YOLOv5 to find the layout, OCR to pull out the text, spaCy to classify it, then embeddings to match candidates to job postings. <span class="num">86.7%</span> precision and <span class="num">84.8%</span> F1 on genuinely messy input. Shipped on Azure DevOps with CI/CD, monitoring and live inference.</p>
+  <p data-fr>Un pipeline complet sur des documents numérisés jamais deux fois pareils. YOLOv5 pour trouver la mise en page, OCR pour extraire le texte, spaCy pour le classer, puis des embeddings pour apparier candidats et offres. <span class="num">86,7 %</span> de précision et <span class="num">84,8 %</span> de F1 sur des entrées réellement désordonnées. Déployé sur Azure DevOps avec CI/CD, surveillance et inférence en direct.</p>
+  <p data-en>Most of the work was the input data, not the model. That has been true of everything I have built since.</p>
+  <p data-fr>L'essentiel du travail portait sur les données d'entrée, pas sur le modèle. C'est resté vrai pour tout ce que j'ai construit depuis.</p></div>
+
+  <p class="stack">YOLOv5 · OCR · spaCy · embeddings · Azure DevOps</p>
+</div>
+</div></section>
+</main>
+<script src="app.js"></script></body></html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Python computes, the LLM writes | Ons Abderrahim</title>
+<meta name="description" content="How I stopped a reporting agent from ever showing a wrong number, and the three problems it still does not fix.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="head"><div class="wrap">
+  <a class="brand" href="index.html">Ons Abderrahim</a>
+  <nav class="nav">
+    <a href="index.html">Home</a><a href="work.html">Work</a><a href="projects.html">Projects</a><a href="research.html">Research</a>
+    <a href="writing.html">Writing</a><a href="about.html">About</a>
+    <button id="lang">FR</button>
+  </nav>
+</div></header>
+
+<main>
+<section class="hero"><span class="tick tl"></span><span class="tick br"></span><div class="wrap">
+  <p class="lab" data-en>Writing</p><p class="lab" data-fr>Écrits</p>
+  <h1 data-en>Python computes, the LLM writes</h1>
+  <h1 data-fr>Python calcule, le LLM rédige</h1>
+  <p class="dek" data-en>How I stopped a reporting agent from ever showing a wrong number, and the three problems this still does not fix.</p>
+  <p class="dek" data-fr>Comment j'ai empêché un agent de reporting d'afficher un seul chiffre erroné, et les trois problèmes que ça ne règle toujours pas.</p>
+</div></section>
+
+<section><div class="wrap narrow">
+<div data-en>
+  <p>I spent a year building an AI agent for a hockey equipment factory. Once a week the quality team goes through production defects, and my agent writes the analysis they read: what moved, where defects piled up, which trends held over sixty weeks.</p>
+  <p>There were 7,780 defect records. The model was Llama 3.3 70B, hosted on site with vLLM because the data was not allowed to leave the building. None of that is the interesting part.</p>
+  <p>The interesting part is that the agent has never shown a wrong number in a meeting, and that this is the only reason anyone kept using it.</p>
+
+  <h2>Why one wrong number ends it</h2>
+  <p>A reporting tool does not lose trust slowly. It loses it all at once.</p>
+  <p>If an engineer reads that defects rose 12%, opens the spreadsheet and finds 8%, the tool is finished. Not weakened. Finished. They stop reading it, and worse, they stop believing the three numbers it got right. Nobody wants to fact-check a robot every Tuesday morning.</p>
+  <p>So the target was not high accuracy. It was zero. A system that is right 95% of the time puts a wrong figure in roughly every fifth meeting. Over three months that is several occasions on which it loses the room. For this job, 95% is not a good score. It is a slower way of failing.</p>
+  <p>That changed what I was building. I was not trying to make the model more accurate. I was trying to make one kind of mistake impossible.</p>
+
+  <h2>The pattern</h2>
+  <p>The model is never allowed to produce a number.</p>
+  <p>Python works out every quantity that will appear in the report. The model receives them already calculated and already formatted, and its whole job is to arrange them into readable French. It is a writer with a fact sheet, not an analyst.</p>
+  <p>The values arrive as text, already written the French way: comma for the decimal point, a space before the percent sign. This matters more than it looks. If the model can copy something straight across, copying is the easiest path. Hand it <code>0.083</code> and ask for a percentage and you have invited it to do the arithmetic itself.</p>
+
+  <h2>The checking is the real work</h2>
+  <p>Writing a careful prompt is not enough. Models drift, especially in long outputs, and especially when the obvious next word in a sentence happens to be a number.</p>
+  <p>So once the text is written, every number in it is compared against the set Python produced. Anything that is not in that set did not come from the data, by definition.</p>
+  <p>Pulling numbers out of French prose is fiddlier than it sounds. <code>88,1 %</code> uses a comma. <code>7 780</code> uses a space for the thousands, sometimes a narrow one. You cannot simply split on spaces.</p>
+  <p>The allowed set is every computed value plus a short list of exceptions, and that list is where the false alarms live. The first version rejected the phrase <em>"taux de 2,7 par 100 unités"</em>. Both numbers are correct, but <code>100</code> is not a data value at all. It is part of the phrase "per 100 units". Week numbers, station numbers and the year caused the same trouble. Keeping that list current is the honest cost of the whole approach.</p>
+
+  <h2>The part I did not see coming</h2>
+  <p>The model does not invent numbers at random. It invents the ones you get by <em>working something out</em>.</p>
+  <p>Given 412 defects this week and 380 last week, it will happily write "an increase of 32, about 8%". Both correct. Neither in my list of facts. Both rejected.</p>
+  <p>That forced a rule I would not have reached otherwise: <strong>if you want a number mentioned, you have to compute it first.</strong> Differences, percentages, ratios, rates per hundred, how many weeks a trend has run. My list of facts roughly tripled once I understood this, and the rejections dropped sharply.</p>
+  <p>There is a nice side effect. The numbers the model is allowed to say are exactly the numbers I decided were worth saying. The safety check doubles as an editor.</p>
+
+  <h2>Giving up instead of trying harder</h2>
+  <p>When the check fails, the obvious move is to try again with a firmer prompt. I allow two attempts. After that the system stops trying to write well and fills in a fixed template. It is stiff, repetitive, and obviously written by a machine. It also cannot be wrong.</p>
+  <p>That was the hardest call to make and the easiest to defend afterwards. A tool that sometimes reads awkwardly is mildly annoying. A tool that sometimes lies is not a tool.</p>
+
+  <h2>What this does not fix</h2>
+  <p>I want to be exact about the limits, because the approach is narrower than a phrase like "stops hallucination" suggests.</p>
+  <p><strong>It checks numbers, not statements.</strong> If the model writes that defects are falling while every figure it quotes is correct and rising, the check passes. The numbers are right and the sentence is wrong. Nothing in what I built looks at direction or cause. This is the biggest hole and I know it.</p>
+  <p><strong>The tolerance is a compromise.</strong> I allow a small margin so ordinary rounding is not rejected. That margin is also a gap that small errors can slip through.</p>
+  <p><strong>It cannot catch what is left out.</strong> Three accurate sentences that quietly skip the most important thing in the data will pass every check.</p>
+  <p><strong>I have no measure of quality.</strong> I can tell you it has never printed a wrong number. I cannot tell you whether the reports are any good, whether they pick out the right findings, or whether last month's change to the prompt made them better. Being correct without being evaluated is half an engineering practice.</p>
+
+  <h2>What I would build next</h2>
+  <p>Check direction as well as size. Compute whether each change went up or down, and reject sentences whose wording says the opposite. A day of work, and it closes the largest hole.</p>
+  <p>Build a reference set. Fifty fact sheets with summaries written by a person, and a score, so that changing the prompt stops being guesswork.</p>
+  <p>Count the rejections properly instead of logging them as warnings. How often the check fires, over time, says something real about the model drifting and about how much I have failed to compute.</p>
+
+  <p style="margin-top:32px">If you are putting a language model in front of people who will check its arithmetic, the useful question is not how to make it more accurate. It is which kind of mistake you can rule out completely, and what you are willing to show instead on the days you cannot.</p>
+</div>
+
+<div data-fr>
+  <p>J'ai passé un an à construire un agent IA pour une usine d'équipement de hockey. Une fois par semaine, l'équipe qualité passe en revue les défauts de production, et mon agent rédige l'analyse qu'elle lit.</p>
+  <p>7 780 enregistrements de défauts. Llama 3.3 70B, hébergé sur site avec vLLM parce que les données n'avaient pas le droit de sortir du bâtiment. Rien de tout ça n'est la partie intéressante.</p>
+  <p>La partie intéressante, c'est que l'agent n'a jamais affiché un chiffre erroné en réunion, et que c'est la seule raison pour laquelle on a continué à l'utiliser.</p>
+
+  <h2>Pourquoi un seul chiffre faux met fin à tout</h2>
+  <p>Un outil de reporting ne perd pas la confiance petit à petit. Il la perd d'un coup.</p>
+  <p>Si un ingénieur lit que les défauts ont augmenté de 12 %, ouvre le tableur et trouve 8 %, l'outil est fini. Pas affaibli. Fini. On cesse de le lire, et pire, on cesse de croire les trois chiffres qui étaient justes.</p>
+  <p>L'objectif n'était donc pas une haute précision. C'était zéro. Un système juste 95 % du temps met un chiffre faux dans environ une réunion sur cinq. Sur trois mois, ça fait plusieurs fois où il perd la salle. Pour ce travail, 95 % n'est pas un bon score. C'est une façon plus lente d'échouer.</p>
+
+  <h2>Le principe</h2>
+  <p>Le modèle n'a jamais le droit de produire un nombre.</p>
+  <p>Python calcule chaque quantité qui apparaîtra dans le rapport. Le modèle les reçoit déjà calculées et déjà mises en forme, et tout son travail est de les organiser en français lisible. C'est un rédacteur avec une fiche de données, pas un analyste.</p>
+  <p>Les valeurs arrivent sous forme de texte, déjà écrites à la française : virgule décimale, espace avant le signe pourcent. Si le modèle peut recopier tel quel, recopier devient le chemin le plus facile.</p>
+
+  <h2>La vérification est le vrai travail</h2>
+  <p>Un prompt bien écrit ne suffit pas. Les modèles dérivent, surtout sur les textes longs. Une fois le texte écrit, chaque nombre est comparé à l'ensemble calculé par Python. Ce qui n'y figure pas ne vient pas des données, par définition.</p>
+  <p>L'ensemble autorisé comprend aussi une courte liste d'exceptions, et c'est là que vivent les fausses alertes. La première version rejetait « taux de 2,7 par 100 unités » : les deux nombres sont justes, mais <code>100</code> n'est pas une donnée, c'est un morceau de l'expression. Tenir cette liste à jour est le coût honnête de la méthode.</p>
+
+  <h2>Ce que je n'avais pas vu venir</h2>
+  <p>Le modèle n'invente pas des nombres au hasard. Il invente ceux qu'on obtient <em>en calculant</em>.</p>
+  <p>Avec 412 défauts cette semaine et 380 la semaine dernière, il écrira volontiers « une hausse de 32, soit environ 8 % ». Les deux sont justes. Aucun n'est dans ma liste de faits. Les deux sont rejetés.</p>
+  <p>D'où une règle : <strong>si vous voulez qu'un nombre soit mentionné, il faut l'avoir calculé.</strong> Ma liste a triplé de taille une fois que je l'ai compris, et les rejets ont fortement baissé.</p>
+
+  <h2>Abandonner plutôt qu'insister</h2>
+  <p>Quand la vérification échoue, le réflexe est de recommencer avec un prompt plus ferme. J'autorise deux tentatives. Ensuite, le système cesse de chercher à bien écrire et remplit un gabarit fixe. Il est rigide, répétitif, visiblement écrit par une machine. Il ne peut pas non plus se tromper.</p>
+
+  <h2>Ce que ça ne règle pas</h2>
+  <p><strong>Ça vérifie les nombres, pas les affirmations.</strong> Si le modèle écrit que les défauts baissent alors que tous les chiffres cités sont justes et en hausse, la vérification passe. C'est le plus gros trou, et je le sais.</p>
+  <p><strong>La marge est un compromis.</strong> Je tolère un petit écart pour ne pas rejeter un arrondi normal. Cette marge laisse aussi passer les petites erreurs.</p>
+  <p><strong>Ça ne détecte pas ce qui est omis.</strong> Trois phrases exactes qui passent sous silence la chose la plus importante réussiront toutes les vérifications.</p>
+  <p><strong>Je n'ai aucune mesure de qualité.</strong> Je peux affirmer qu'aucun chiffre erroné n'est jamais sorti. Je ne peux pas dire si les rapports sont bons. Être juste sans être évalué, c'est la moitié d'une pratique d'ingénierie.</p>
+
+  <p style="margin-top:32px">Si vous mettez un modèle de langage devant des gens qui vérifieront son arithmétique, la bonne question n'est pas comment le rendre plus exact. C'est quelle sorte d'erreur vous pouvez écarter complètement, et ce que vous acceptez de montrer à la place les jours où vous ne le pouvez pas.</p>
+</div>
+</div></section>
+</main>
+<script src="app.js"></script></body></html>
