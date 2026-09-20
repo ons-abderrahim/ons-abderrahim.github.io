@@ -4,7 +4,7 @@
    =================================================================== */
 :root{
   --ink:#0E1821; --ink-2:#16232F; --line:#1E2E3C;
-  --paper:#F7F5F0; --paper-2:#EFEBE2; --rule:#DDD7C9;
+  --paper:#FFFFFF; --paper-2:#EFEBE2; --rule:#DDD7C9;
   --body:#26323C; --mid:#55646F; --muted:#8A949D;
   --sig:#D4326B; --sig-2:#A8214F; --sig-soft:#FBE7EF;
   --blue:#2E6F8E;
@@ -31,7 +31,7 @@ a{color:inherit}
 .lab-sig{color:var(--sig)}
 
 /* ================= HEADER ================= */
-.head{position:sticky;top:0;z-index:40;background:rgba(247,245,240,.88);
+.head{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.90);
   backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--rule)}
 .head .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:26px}
 .brand{font-family:var(--disp);font-size:18px;text-decoration:none;color:var(--ink);
@@ -112,7 +112,7 @@ p{margin:0 0 18px;max-width:66ch}
   border-bottom:1px solid var(--rule);border-left:2px solid transparent;
   transition:border-color .3s,padding-left .3s,background .3s}
 .proj:last-child{border-bottom:0}
-.proj:hover{border-left-color:var(--sig);padding-left:26px;background:#FFFDF9}
+.proj:hover{border-left-color:var(--sig);padding-left:26px;background:#FBF9F5}
 .proj .ph{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .proj h4{font-family:var(--disp);font-size:19px;line-height:1.25;margin:0;color:var(--ink);font-weight:500}
 .proj:hover h4{color:var(--sig)}

@@ -129,14 +129,18 @@
   <p class="k">HYDATIS · TUNIS · 2022</p>
   <h2 data-en>My first vision system in production</h2>
   <h2 data-fr>Mon premier système de vision en production</h2>
+  <p class="muted" data-en>Data science intern &middot; published as a case study on the <a href="https://blog.roboflow.com/resume-parsing-computer-vision/" target="_blank" rel="noopener">Roboflow blog</a></p>
+  <p class="muted" data-fr>Stagiaire en science des données &middot; publié comme étude de cas sur le <a href="https://blog.roboflow.com/resume-parsing-computer-vision/" target="_blank" rel="noopener">blogue de Roboflow</a></p>
 
   <div class="blk"><p class="lab lab-sig" data-en>What it was</p><p class="lab lab-sig" data-fr>De quoi il s'agissait</p>
-  <p data-en>A full pipeline over scanned documents that were never twice the same. YOLOv5 to find the layout, OCR to pull out the text, spaCy to classify it, then embeddings to match candidates to job postings. <span class="num">86.7%</span> precision and <span class="num">84.8%</span> F1 on genuinely messy input. Shipped on Azure DevOps with CI/CD, monitoring and live inference.</p>
-  <p data-fr>Un pipeline complet sur des documents numérisés jamais deux fois pareils. YOLOv5 pour trouver la mise en page, OCR pour extraire le texte, spaCy pour le classer, puis des embeddings pour apparier candidats et offres. <span class="num">86,7 %</span> de précision et <span class="num">84,8 %</span> de F1 sur des entrées réellement désordonnées. Déployé sur Azure DevOps avec CI/CD, surveillance et inférence en direct.</p>
+  <p data-en>Ordinary OCR reads straight across a page, so a two-column resume comes out with the two columns interleaved and the text unusable. The fix was to find the columns first. YOLOv5 segments each page into five regions, OCR then reads each region on its own, spaCy classifies the text, and embeddings match candidates to job postings.</p>
+  <p data-en>The detection model was trained on <span class="num">3,541</span> labelled resumes and reached <span class="num">86.7%</span> precision, <span class="num">69.9%</span> recall and <span class="num">73.1%</span> mAP. Shipped on Azure DevOps with CI/CD, monitoring and live inference.</p>
+  <p data-fr>L'OCR ordinaire lit une page de gauche à droite, donc un CV sur deux colonnes ressort avec les deux colonnes entremêlées et le texte inutilisable. La solution était de trouver les colonnes d'abord. YOLOv5 découpe chaque page en cinq régions, l'OCR lit ensuite chaque région à part, spaCy classe le texte, et des embeddings apparient candidats et offres.</p>
+  <p data-fr>Le modèle de détection a été entraîné sur <span class="num">3 541</span> CV annotés et atteint <span class="num">86,7 %</span> de précision, <span class="num">69,9 %</span> de rappel et <span class="num">73,1 %</span> de mAP. Déployé sur Azure DevOps avec CI/CD, surveillance et inférence en direct.</p>
   <p data-en>Most of the work was the input data, not the model. That has been true of everything I have built since.</p>
   <p data-fr>L'essentiel du travail portait sur les données d'entrée, pas sur le modèle. C'est resté vrai pour tout ce que j'ai construit depuis.</p></div>
 
-  <p class="stack">YOLOv5 · OCR · spaCy · embeddings · Azure DevOps</p>
+  <p class="stack">YOLOv5 · OCR · spaCy · embeddings · Roboflow · Azure DevOps</p>
 </div>
 </div></section>
 </main>
