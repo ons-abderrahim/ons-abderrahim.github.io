@@ -66,41 +66,55 @@
 <section><div class="wrap narrow">
   <div class="shead"><span class="idx">03</span><h2 data-en>How the numbers are checked</h2><h2 data-fr>Comment les chiffres sont vérifiés</h2></div>
   <figure class="fig">
-<svg viewBox="0 0 860 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Verification loop">
+<svg viewBox="0 0 892 172" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="How the weekly report is produced and checked">
   <g font-family="IBM Plex Mono, monospace" font-size="11.5">
-    <rect x="4" y="58" width="118" height="52" rx="5" fill="#EFEBE2" stroke="#DDD7C9"/>
-    <text x="63" y="82" text-anchor="middle" fill="#55646F">defect</text>
-    <text x="63" y="97" text-anchor="middle" fill="#55646F">records</text>
 
-    <rect x="168" y="58" width="132" height="52" rx="5" fill="#0E1821" stroke="#1E2E3C"/>
-    <text x="234" y="82" text-anchor="middle" fill="#D4326B" font-weight="500">Python</text>
-    <text x="234" y="97" text-anchor="middle" fill="#8FA3B2">computes</text>
+    <rect x="4" y="64" width="110" height="52" rx="5" fill="#EFEBE2" stroke="#DDD7C9"/>
+    <text x="59" y="88" text-anchor="middle" fill="#55646F">defect</text>
+    <text x="59" y="103" text-anchor="middle" fill="#55646F">records</text>
 
-    <rect x="346" y="58" width="132" height="52" rx="5" fill="#FFFDF9" stroke="#DDD7C9"/>
-    <text x="412" y="82" text-anchor="middle" fill="#26323C">LLM writes</text>
-    <text x="412" y="97" text-anchor="middle" fill="#8A949D">prose only</text>
+    <rect x="152" y="64" width="126" height="52" rx="5" fill="#0E1821" stroke="#1E2E3C"/>
+    <text x="215" y="88" text-anchor="middle" fill="#D4326B" font-weight="500">Python</text>
+    <text x="215" y="103" text-anchor="middle" fill="#8FA3B2">computes</text>
 
-    <rect x="524" y="58" width="132" height="52" rx="5" fill="#0E1821" stroke="#1E2E3C"/>
-    <text x="590" y="82" text-anchor="middle" fill="#D4326B" font-weight="500">verify</text>
-    <text x="590" y="97" text-anchor="middle" fill="#8FA3B2">every figure</text>
+    <rect x="366" y="64" width="126" height="52" rx="5" fill="#FFFDF9" stroke="#DDD7C9"/>
+    <text x="429" y="88" text-anchor="middle" fill="#26323C">LLM writes</text>
+    <text x="429" y="103" text-anchor="middle" fill="#8A949D">prose only</text>
 
-    <rect x="702" y="30" width="154" height="46" rx="5" fill="#EFEBE2" stroke="#DDD7C9"/>
-    <text x="779" y="58" text-anchor="middle" fill="#26323C">published</text>
+    <rect x="536" y="64" width="126" height="52" rx="5" fill="#0E1821" stroke="#1E2E3C"/>
+    <text x="599" y="88" text-anchor="middle" fill="#D4326B" font-weight="500">verify</text>
+    <text x="599" y="103" text-anchor="middle" fill="#8FA3B2">every figure</text>
 
-    <rect x="702" y="94" width="154" height="46" rx="5" fill="#FBE7EF" stroke="#D4326B"/>
-    <text x="779" y="115" text-anchor="middle" fill="#7A1739">deterministic</text>
-    <text x="779" y="130" text-anchor="middle" fill="#7A1739">template</text>
+    <rect x="760" y="30" width="126" height="46" rx="5" fill="#EFEBE2" stroke="#DDD7C9"/>
+    <text x="823" y="58" text-anchor="middle" fill="#26323C">published</text>
 
-    <g class="draw" stroke="#8A949D" stroke-width="1.2" fill="none">
-      <path d="M122 84 H168"/><path d="M300 84 H346"/><path d="M478 84 H524"/>
-      <path d="M656 84 H680 V53 H702"/><path d="M656 84 H680 V117 H702"/>
+    <rect x="760" y="100" width="126" height="52" rx="5" fill="#FBE7EF" stroke="#D4326B"/>
+    <text x="823" y="121" text-anchor="middle" fill="#7A1739">deterministic</text>
+    <text x="823" y="136" text-anchor="middle" fill="#7A1739">template</text>
+
+    <g class="draw" fill="none" stroke-width="1.2">
+      <path d="M114 90 H144" stroke="#8A949D"/>
+      <path d="M278 90 H358" stroke="#8A949D"/>
+      <path d="M492 90 H528" stroke="#8A949D"/>
+      <path d="M662 90 H700" stroke="#8A949D"/>
+      <path d="M700 90 V53 H752" stroke="#8A949D"/>
+      <path d="M700 90 V126 H752" stroke="#D4326B"/>
     </g>
+
     <g class="fade">
-      <text x="696" y="49" text-anchor="end" fill="#55646F" font-size="10.5">pass</text>
-      <text x="698" y="133" text-anchor="end" fill="#D4326B" font-size="10.5">2 fails</text>
-      <path d="M412 118 V150 H234 V110" stroke="#D4326B" stroke-width="1.1" fill="none" stroke-dasharray="3 3"/>
-      <text x="300" y="164" text-anchor="middle" fill="#D4326B" font-size="10.5">facts, pre-formatted</text>
+      <path d="M144 86 L152 90 L144 94 Z" fill="#8A949D"/>
+      <path d="M358 86 L366 90 L358 94 Z" fill="#8A949D"/>
+      <path d="M528 86 L536 90 L528 94 Z" fill="#8A949D"/>
+      <path d="M752 49 L760 53 L752 57 Z" fill="#8A949D"/>
+      <path d="M752 122 L760 126 L752 130 Z" fill="#D4326B"/>
+
+      <text x="726" y="44" text-anchor="middle" fill="#55646F" font-size="10.5">pass</text>
+      <text x="730" y="145" text-anchor="middle" fill="#D4326B" font-size="10.5">2 fails</text>
+
+      <path d="M322 98 V126" stroke="#D4326B" stroke-width="1" fill="none" stroke-dasharray="3 3"/>
+      <text x="322" y="140" text-anchor="middle" fill="#D4326B" font-size="10.5">facts, pre-formatted</text>
     </g>
+
   </g>
 </svg>
 <figcaption data-en>The model never produces a number. Python computes every figure and passes them over already formatted. The model writes only the sentences around them. Every number in the finished text is then checked against the source data.</figcaption>
